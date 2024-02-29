@@ -24,8 +24,8 @@ const Authenticate = () => {
                   Connecting Everyone! Nepali Social Media
                 </p>
               </div>
-              <Login />
-              {/* <Register/> */}
+              {/* <Login /> */}
+              <Register/>
             </Card>
           </div>
         </Grid>

@@ -2,16 +2,19 @@ import { Button, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/mat
 import { ErrorMessage, Field, Form, Formik, validateYupSchema } from 'formik'
 import React,{useState} from 'react'
 import * as Yup from 'yup'
+import { registerUserAction } from '../../Redux/Auth/auth.action';
+import { useDispatch} from 'react-redux'
 
 const initialValues={firstName: "", lastName: "", email:"", password: "", gender: ""};
 const validationSchema={email:Yup.string().email("Invalid email").required("Email is required"), password:Yup.string().min(6, "Passwored must be at least 6 character").required("password is required"), };
 
 const Register = () => {
   const[gender, setGender]=useState("")
-
+  const dispatch= useDispatch();
 const handleSubmit=(values)=>{
   values.gender=gender
  console.log("handleSubmit", values)
+ dispatch(registerUserAction({data:values}))
 }
 
 const handleChange = (event) => {
