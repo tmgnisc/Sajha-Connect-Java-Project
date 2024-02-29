@@ -1,11 +1,22 @@
-import Authentication from './pages/Authenticate/Authentication'
-import './App.css';
-import { Grid } from '@mui/material';
+import Authentication from "./pages/Authenticate/Authentication";
+import HomePage from "./pages/HomePage/HomePage";
+import Message from "./pages/Message/Message";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { Grid } from "@mui/material";
+
+
 
 function App() {
   return (
     <div className="">
-      <Authentication />
+<Routes>
+  <Route path="/" element={<Authentication/>} />
+  <Route path="/home" element={<HomePage/>} />
+  <Route path="/message" element={<Message/>} />
+   
+</Routes>
+
     </div>
   );
 }
