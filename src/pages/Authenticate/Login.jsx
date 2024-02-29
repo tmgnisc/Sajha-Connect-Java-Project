@@ -36,9 +36,12 @@ const handleSubmit=(values)=>{
       </div>
      <Button sx={{padding:".8rem 0rem"}} fullWidth type="submit" variant='contained' color="primary">Login</Button>
     </Form>
-  
+
 
   </Formik>
+  <div className='flex gap-5 items-center'>
+    <p>If you don't have an account</p>
+    </div>
   </>
   )
 }
