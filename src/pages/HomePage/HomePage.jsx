@@ -5,7 +5,7 @@ import {Route, Routes, useLocation} from 'react-router-dom'
 import MiddlePart from "../../components/MiddlePart/MiddlePart";
 import CreateReelsForm from "../../components/Reels/CreateReelsForm";
 import Reels from "../../components/Reels/Reels";
-
+import Profile from "../../pages/Profile/Profile"
 const HomePage = () => {
   const location=useLocation();
   return (
