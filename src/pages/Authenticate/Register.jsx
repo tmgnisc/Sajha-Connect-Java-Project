@@ -4,6 +4,7 @@ import React,{useState} from 'react'
 import * as Yup from 'yup'
 import { registerUserAction } from '../../Redux/Auth/auth.action';
 import { useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 const initialValues={firstName: "", lastName: "", email:"", password: "", gender: ""};
 const validationSchema={email:Yup.string().email("Invalid email").required("Email is required"), password:Yup.string().min(6, "Passwored must be at least 6 character").required("password is required"), };
@@ -11,6 +12,7 @@ const validationSchema={email:Yup.string().email("Invalid email").required("Emai
 const Register = () => {
   const[gender, setGender]=useState("")
   const dispatch= useDispatch();
+  const navigate=useNavigate();
 const handleSubmit=(values)=>{
   values.gender=gender
  console.log("handleSubmit", values)
@@ -64,6 +66,10 @@ const handleChange = (event) => {
   
 
   </Formik>
+  <div className='flex gap-2 items-center justify-center pt-5'>
+    <p>If you already have account?</p>
+    <Button onClick={()=>navigate("/login")}>Login</Button>
+  </div>
   </>
   )
 }
