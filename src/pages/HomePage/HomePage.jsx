@@ -6,6 +6,7 @@ import MiddlePart from "../../components/MiddlePart/MiddlePart";
 import CreateReelsForm from "../../components/Reels/CreateReelsForm";
 import Reels from "../../components/Reels/Reels";
 import Profile from "../../pages/Profile/Profile"
+import HomeRight from "../../components/HomeRight/HomeRight";
 const HomePage = () => {
   const location=useLocation();
   return (
@@ -25,6 +26,12 @@ const HomePage = () => {
             <Route path="/create-reels" element={<CreateReelsForm />} />
             <Route path="/profile/:id" element={<Profile />} />
           </Routes>
+
+        </Grid>
+        <Grid item lg={3} className="relative">
+          <div className="sticky top-0 w-full">
+            <HomeRight/>
+          </div>
 
         </Grid>
       </Grid>
