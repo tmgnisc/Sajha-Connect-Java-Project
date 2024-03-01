@@ -1,8 +1,16 @@
 import React from "react";
 import { navigationMenu } from "./SidebarNavigation";
-import { Avatar, Divider } from "@mui/material";
+import { Avatar, Button, Divider, Menu, MenuItem } from "@mui/material";
 
 const Sidebar = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className="card h-screen flex flex-col justify-between py-5">
       <div className="space-y-8 pl-5">
@@ -20,10 +28,33 @@ const Sidebar = () => {
         <div className="flex items-center space-x-3 ">
           <Avatar src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"/>
          <div>
-          <p>Nischal tamang</p>
+          <p className="font-bold">Nischal tamang</p>
+          <p className="opacity-70">@CodeWithPororo</p>
          </div>
           
         </div>
+        <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Dashboard
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
       </div>
      </div>
   
