@@ -3,6 +3,7 @@ import React from "react";
 import Login from "./Login";
 import Register from "./Register";
 import { Route, Routes } from "react-router-dom";
+
 const Authenticate = () => {
   return (
     <div>
@@ -11,7 +12,7 @@ const Authenticate = () => {
         <Grid className="h-screen overflow-hidden" item xs={7}>
           <img
             className="h-full w-full"
-            src="https://cdn.pixabay.com/photo/2018/11/29/21/51/social-media-3846597_1280.png"
+            src="https://i.imgur.com/CpKIBe9.png"
             alt="image "
           />
         </Grid>
