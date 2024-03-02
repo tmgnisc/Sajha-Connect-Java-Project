@@ -10,7 +10,7 @@ const StoryCircle = () => {
           <Avatar sx={{width:"5rem", height: "5rem"}} src='https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397_1280.png'>
        
           </Avatar>
-          <p>Nischal Tamang</p>
+          <p>Nischal</p>
         </div>
 
      
