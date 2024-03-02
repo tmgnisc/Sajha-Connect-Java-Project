@@ -33,7 +33,7 @@ const PostCard = () => {
           </IconButton>
         }
         title="Nischal"
-        subheader="@nichaltmg"
+        subheader="@nischaltmg"
       />
       <CardMedia
         component="img"
@@ -62,11 +62,15 @@ const PostCard = () => {
             <ChatBubbleIcon/>
           </IconButton>
         </div>
+        <div>
+          <IconButton>
+          {true?<BookmarkIcon/>:<BookmarkBorderIcon/>}
+          </IconButton>
+       
+      </div>
       </CardActions>
 
-      <div>
-         {true?<BookmarkIcon/>:<BookmarkBorderIcon/>}
-      </div>
+   
     </Card>
   );
 };
