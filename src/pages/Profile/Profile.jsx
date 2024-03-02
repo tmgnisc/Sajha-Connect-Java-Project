@@ -5,7 +5,14 @@ const Profile = () => {
   const {id}= useParams()
   return (
     <div>
-      Profile - {id}
+     <div className='py-10 w-[70%]'>
+      <div className='rounded-md'>
+        <div className='h-[15rem]'>
+          
+        </div>
+
+      </div>
+     </div>
     </div>
   )
 }
