@@ -11,11 +11,11 @@ const tabs=[
 ]
 const Profile = () => {
   const { id } = useParams();
-  const [value, setValue] = React.useState('one');
+  const [value, setValue] = React.useState('post');
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+const handleChange = (event, newValue) => {
+  setValue(newValue);
+}
   return (
     <div className="py-10 w-[70%]">
       <div className="rounded-md">
