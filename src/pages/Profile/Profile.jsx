@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Avatar, Box, Button, Tab, Tabs } from "@mui/material";
+import { Avatar, Box, Button, Card, Tab, Tabs } from "@mui/material";
 import PostCard from "../../components/Post/PostCard";
 
 
@@ -20,7 +20,7 @@ const handleChange = (event, newValue) => {
   setValue(newValue);
 }
   return (
-    <div className="py-10 w-[70%]">
+    <Card className="my-10 w-[70%]">
       <div className="rounded-md">
         <div className="h-[15rem]">
           <img
@@ -73,7 +73,7 @@ const handleChange = (event, newValue) => {
     <div className="flex justify-center">
 
       {value==="post"? <div className="space-y-5 w-[70%] my-10">
-{posts.map((item)=><div className="border border-slate-500 rounded-md ">
+{posts.map((item)=><div className="border border-slate-100 rounded-md ">
   <PostCard/>
 </div>)}
       </div>:""}
@@ -81,7 +81,7 @@ const handleChange = (event, newValue) => {
     </div>
       </section>
     </div>
-    </div>
+    </Card>
   );
 };
 
