@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Button, Tab, Tabs } from "@mui/material";
+import PostCard from "../../components/Post/PostCard";
 
 
 const tabs=[
@@ -9,6 +10,8 @@ const tabs=[
   {value:"saved", name:"Saved"},
   {value:"repost", name:"Repost"},
 ]
+
+const posts=[1,1,1,1]
 const Profile = () => {
   const { id } = useParams();
   const [value, setValue] = React.useState('post');
@@ -56,7 +59,7 @@ const handleChange = (event, newValue) => {
         </div>
       </div>
       <section>
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', borderBottom:1, borderColor: "divider" }}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -67,6 +70,15 @@ const handleChange = (event, newValue) => {
      {tabs.map((item)=><Tab value={item.value} label={item.name} />)}
       </Tabs>
     </Box>
+    <div className="flex justify-center">
+
+      {value==="post"? <div className="space-y-5 w-[70%] my-10">
+{posts.map((item)=><div className="border border-slate-500 rounded-md ">
+  <PostCard/>
+</div>)}
+      </div>:""}
+
+    </div>
       </section>
     </div>
     </div>
