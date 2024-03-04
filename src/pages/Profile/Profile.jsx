@@ -2,6 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Button, Tab, Tabs } from "@mui/material";
 
+
+const tabs=[
+  {value:"post", name:"Post"},
+  {value:"reels", name:"Reels"},
+  {value:"saved", name:"Saved"},
+  {value:"repost", name:"Repost"},
+]
 const Profile = () => {
   const { id } = useParams();
   const [value, setValue] = React.useState('one');
@@ -55,13 +62,9 @@ const Profile = () => {
         onChange={handleChange}
         aria-label="wrapped label tabs example"
       >
-        <Tab
-          value="one"
-          label="New Arrivals in the Longest Text of Nonfiction that should appear in the next line"
-          wrapped
-        />
-        <Tab value="two" label="Item Two" />
-        <Tab value="three" label="Item Three" />
+  
+
+     {tabs.map((item)=><Tab value={item.value} label={item.name} />)}
       </Tabs>
     </Box>
       </section>
