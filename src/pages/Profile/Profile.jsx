@@ -1,9 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Box, Button, Tab, Tabs } from "@mui/material";
 
 const Profile = () => {
   const { id } = useParams();
+  const [value, setValue] = React.useState('one');
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
   return (
     <div className="py-10 w-[70%]">
       <div className="rounded-md">
@@ -26,10 +31,11 @@ const Profile = () => {
               Edit Profile
             </Button>
           ) : (
-            <Button variant="outlined">Follow</Button>
+            <Button variant="outlined">Follow</Button> 
           )}
         </div>
-        <div>
+        <div className="p-5">
+         <div>
           <h1 className="py-1 font-bold text-xl">Nischal Tamang</h1>
           <p>@codeWithPororo</p>
         </div>
@@ -39,9 +45,27 @@ const Profile = () => {
           <span>2 Followings</span>
         </div>
         <div>
-          
+          <p>Hello this is test message just to make sure if it is working or not. </p>
         </div>
       </div>
+      <section>
+      <Box sx={{ width: '100%' }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="wrapped label tabs example"
+      >
+        <Tab
+          value="one"
+          label="New Arrivals in the Longest Text of Nonfiction that should appear in the next line"
+          wrapped
+        />
+        <Tab value="two" label="Item Two" />
+        <Tab value="three" label="Item Three" />
+      </Tabs>
+    </Box>
+      </section>
+    </div>
     </div>
   );
 };
