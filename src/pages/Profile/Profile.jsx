@@ -2,23 +2,24 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Button, Card, Tab, Tabs } from "@mui/material";
 import PostCard from "../../components/Post/PostCard";
+import UserReelCard from "../../components/Reels/UserReelCard";
 
+const tabs = [
+  { value: "post", name: "Post" },
+  { value: "reels", name: "Reels" },
+  { value: "saved", name: "Saved" },
+  { value: "repost", name: "Repost" },
+];
 
-const tabs=[
-  {value:"post", name:"Post"},
-  {value:"reels", name:"Reels"},
-  {value:"saved", name:"Saved"},
-  {value:"repost", name:"Repost"},
-]
-
-const posts=[1,1,1,1]
+const posts = [1, 1, 1, 1];
+const reels = [1, 1, 1, 1];
 const Profile = () => {
   const { id } = useParams();
-  const [value, setValue] = React.useState('post');
+  const [value, setValue] = React.useState("post");
 
-const handleChange = (event, newValue) => {
-  setValue(newValue);
-}
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <Card className="my-10 w-[70%]">
       <div className="rounded-md">
@@ -41,46 +42,59 @@ const handleChange = (event, newValue) => {
               Edit Profile
             </Button>
           ) : (
-            <Button variant="outlined">Follow</Button> 
+            <Button variant="outlined">Follow</Button>
           )}
         </div>
         <div className="p-5">
-         <div>
-          <h1 className="py-1 font-bold text-xl">Nischal Tamang</h1>
-          <p>@codeWithPororo</p>
+          <div>
+            <h1 className="py-1 font-bold text-xl">Nischal Tamang</h1>
+            <p>@codeWithPororo</p>
+          </div>
+          <div className="flex gap-2 items-center py-3">
+            <span>40 post</span>
+            <span>25k Followers</span>
+            <span>2 Followings</span>
+          </div>
+          <div>
+            <p>
+              Hello this is test message just to make sure if it is working or
+              not.{" "}
+            </p>
+          </div>
         </div>
-        <div className="flex gap-2 items-center py-3">
-          <span>40 post</span>
-          <span>25k Followers</span>
-          <span>2 Followings</span>
-        </div>
-        <div>
-          <p>Hello this is test message just to make sure if it is working or not. </p>
-        </div>
+        <section>
+          <Box sx={{ width: "100%", borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="wrapped label tabs example"
+            >
+              {tabs.map((item) => (
+                <Tab value={item.value} label={item.name} />
+              ))}
+            </Tabs>
+          </Box>
+          <div className="flex justify-center">
+            {value === "post" ? (
+              <div className="space-y-5 w-[70%] my-10">
+                {posts.map((item) => (
+                  <div className="border border-slate-100 rounded-md ">
+                    <PostCard />
+                  </div>
+                ))}
+              </div>
+            ) : value === "reels" ? (
+              <div className="flex flex-wrap gap-2">
+                {reels.map((item) => (
+                  <UserReelCard />
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </section>
       </div>
-      <section>
-      <Box sx={{ width: '100%', borderBottom:1, borderColor: "divider" }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="wrapped label tabs example"
-      >
-  
-
-     {tabs.map((item)=><Tab value={item.value} label={item.name} />)}
-      </Tabs>
-    </Box>
-    <div className="flex justify-center">
-
-      {value==="post"? <div className="space-y-5 w-[70%] my-10">
-{posts.map((item)=><div className="border border-slate-100 rounded-md ">
-  <PostCard/>
-</div>)}
-      </div>:""}
-
-    </div>
-      </section>
-    </div>
     </Card>
   );
 };
