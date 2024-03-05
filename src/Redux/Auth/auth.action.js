@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL } from "../../config/api";
+import { API_BASE_URL, api } from "../../config/api";
 import {
   GET_PROFILE_FAILURE,
   GET_PROFILE_REQUEST,
@@ -7,6 +7,9 @@ import {
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  UPDATE_PROFILE_FAILURE,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
 } from "./auth.actionType";
 
 export const LoginUserAction = (LoginData) => async (dispatch) => {
@@ -51,7 +54,7 @@ export const registerUserAction = (LoginData) => async (dispatch) => {
 export const getProfileAction = (jwt) => async (dispatch) => {
   dispatch({ type: GET_PROFILE_REQUEST });
   try {
-    const { data } = await axios.post(`${API_BASE_URL}/auth/users/profile`, {
+    const { data } = await axios.get(`${API_BASE_URL}/api/users/profile`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -62,5 +65,18 @@ export const getProfileAction = (jwt) => async (dispatch) => {
   } catch (error) {
     console.log("----------", error);
     dispatch({ type: GET_PROFILE_FAILURE, payload: error });
+  }
+};
+
+export const updateProfileAction = (reqData) => async (dispatch) => {
+  dispatch({ type: UPDATE_PROFILE_REQUEST});
+  try {
+    const { data } = await api.get(`${API_BASE_URL}/api/users/update`, reqData);
+
+    console.log("profile Update ", data);
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    console.log("----------", error);
+    dispatch({ type: UPDATE_PROFILE_FAILURE, payload: error });
   }
 };
