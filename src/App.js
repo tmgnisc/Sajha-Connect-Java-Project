@@ -15,7 +15,7 @@ function App() {
 
   useEffect(()=>{
 dispatch(getProfileAction(jwt))
-  },[])
+  },[jwt])
 
   return (
     <div className="">

@@ -6,10 +6,10 @@ import {
   GET_PROFILE_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
-  LOGIN_SUCCESS,
+  LOGIN_SUCCESS, 
   UPDATE_PROFILE_FAILURE,
   UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,  
 } from "./auth.actionType";
 
 export const LoginUserAction = (LoginData) => async (dispatch) => {
@@ -19,6 +19,8 @@ export const LoginUserAction = (LoginData) => async (dispatch) => {
       `${API_BASE_URL}/auth/signin`,
       LoginData.data
     );
+
+    
 
     if (data.jwt) {
       localStorage.setItem("jwt", data.jwt);
@@ -56,7 +58,7 @@ export const getProfileAction = (jwt) => async (dispatch) => {
   try {
     const { data } = await axios.get(`${API_BASE_URL}/api/users/profile`, {
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        "Authorization": `Bearer ${jwt}`,
       },
     });
 
