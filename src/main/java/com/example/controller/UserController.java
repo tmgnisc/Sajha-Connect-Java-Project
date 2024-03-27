@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.User;
@@ -40,4 +42,16 @@ public class UserController {
 		return user1;
 		
 	}
+		
+		//data sent garda body ma data send garxam...
+		//yo data chai database ma add garna paryo
+//vane tyo data access garna ko lagi yo annotation use garxam
+		//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
+		@PostMapping  
+		public User createUser(@RequestBody User user) {
+			User newUser=new User();
+			newUser.setEmail(user.getEmail());
+			return null;
+			
+		}
 }
