@@ -10,11 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
 	
-	@GetMapping("/home")
+	@GetMapping
 	public String homeControllerHandler() {
 		return "this is home controller";
 	}
+	@GetMapping("/home")
+	public String homeControllerHandler2() {
+		return "this is home controller 2";
+		
+	}
 	
+	@GetMapping("/codewithNischal")
+	public String homeControllerHandler3() {
+		return "this is controler 3";
+	}
 	// @PutMapping
 //	@PostMapping
 	//@DeleteMapping
