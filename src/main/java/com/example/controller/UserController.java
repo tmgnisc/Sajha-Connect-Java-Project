@@ -47,11 +47,15 @@ public class UserController {
 		//yo data chai database ma add garna paryo
 //vane tyo data access garna ko lagi yo annotation use garxam
 		//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
-		@PostMapping  
+		@PostMapping("/users")
 		public User createUser(@RequestBody User user) {
 			User newUser=new User();
 			newUser.setEmail(user.getEmail());
-			return null;
+			newUser.setFirstName(user.getFirstName());
+			newUser.setLastName(user.getLastName());
+			newUser.setPassword(user.getPassword());
+			newUser.setId(user.getId());
+			return newUser;
 			
 		}
 }
