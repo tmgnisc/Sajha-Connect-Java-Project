@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,27 +45,23 @@ public class UserController {
 	
 	@GetMapping("/users")
 	public List<User> getUsers() {
-		
-		List<User> users = new ArrayList<>();
-		User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
-
-		
-		users.add(user1);
+		List<User> users = userRepository.findAll();
+	
 		return users;
 		
 	}
 	
 		@GetMapping("/users/{userId}")
-		public User getUserById(@PathVariable("userId")int id) {
+		public User getUserById(@PathVariable("userId")int id) throws Exception{
 		
-	
-		User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
-		user1.setId(id);
-		
+	Optional<User> user = userRepository.findById(id);
 
+if(user.isPresent()) {
+	return user.get();
+}
 		
 	
-		return user1;
+		throw new Exception("user not exit with userid"+id);
 		
 	}
 		
