@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.User;
+import com.example.repository.UserRepository;
 
 @RestController
 @ComponentScan("com.example")	
 public class UserController {
 
+	@Autowired
+	UserRepository userRepository;
+	
+	//data sent garda body ma data send garxam...
+	//yo data chai database ma add garna paryo
+//vane tyo data access garna ko lagi yo annotation use garxam
+	//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
+	@PostMapping("/users")
+	public User createUser(@RequestBody User user) {
+		User newUser=new User();
+		newUser.setEmail(user.getEmail());
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setPassword(user.getPassword());
+		newUser.setId(user.getId());
+		
+		User savedUser=userRepository.save(newUser);
+		return savedUser;
+		
+	}
+	
 	
 	@GetMapping("/users")
 	public List<User> getUsers() {
@@ -45,21 +68,7 @@ public class UserController {
 		
 	}
 		
-		//data sent garda body ma data send garxam...
-		//yo data chai database ma add garna paryo
-//vane tyo data access garna ko lagi yo annotation use garxam
-		//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
-		@PostMapping("/users")
-		public User createUser(@RequestBody User user) {
-			User newUser=new User();
-			newUser.setEmail(user.getEmail());
-			newUser.setFirstName(user.getFirstName());
-			newUser.setLastName(user.getLastName());
-			newUser.setPassword(user.getPassword());
-			newUser.setId(user.getId());
-			return newUser;
-			
-		}
+
 		
 		
 		@PutMapping("/users")
