@@ -68,22 +68,25 @@ if(user.isPresent()) {
 
 		
 		
-		@PutMapping("/users")
-		public User updateUser(@RequestBody User user) {
+		@PutMapping("/users/{userId}")
+		public User updateUser(@RequestBody User user, @PathVariable int userId) {
 			
-			User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
+			//checking user if exist or not
+			Optional<User> user1 = userRepository.findById(userId);
 			
-			if(user.getFirstName()!=null) {
-				user1.setFirstName(user.getFirstName());
-				
-			}
-			if(user.getLastName()!=null) {
-				user1.setLastName(user.getLastName());
-			}
+//			User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
 			
-			if(user.getEmail()!=null) {
-				user1.setEmail(user.getEmail());
-			}
+//			if(user.getFirstName()!=null) {
+//				user1.setFirstName(user.getFirstName());
+//				
+//			}
+//			if(user.getLastName()!=null) {
+//				user1.setLastName(user.getLastName());
+//			}
+//			
+//			if(user.getEmail()!=null) {
+//				user1.setEmail(user.getEmail());
+//			}
 			
 			
 			return user1;
