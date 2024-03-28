@@ -73,6 +73,9 @@ if(user.isPresent()) {
 			
 			//checking user if exist or not
 			Optional<User> user1 = userRepository.findById(userId);
+			if(user1.isEmpty()) {
+				throw new Exception("user not exist with this mentioned id."+userId);
+			}
 			
 //			User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
 			
