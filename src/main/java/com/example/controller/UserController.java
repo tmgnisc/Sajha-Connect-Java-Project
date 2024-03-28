@@ -69,14 +69,14 @@ if(user.isPresent()) {
 		
 		
 		@PutMapping("/users/{userId}")
-		public User updateUser(@RequestBody User user, @PathVariable int userId) {
+		public User updateUser(@RequestBody User user, @PathVariable int userId) throws Exception {
 			
 			//checking user if exist or not
 			Optional<User> user1 = userRepository.findById(userId);
 			if(user1.isEmpty()) {
 				throw new Exception("user not exist with this mentioned id."+userId);
 			}
-			
+			User oldUser=user1.get();
 //			User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );
 			
 //			if(user.getFirstName()!=null) {
@@ -91,8 +91,19 @@ if(user.isPresent()) {
 //				user1.setEmail(user.getEmail());
 //			}
 			
+			if(user.getFirstName()!=null) {
+				oldUser.setFirstName(user.getFirstName());
+			}
 			
-			return user1;
+			if(user.getLastName()!=null) {
+				oldUser.setLastName(user.getLastName());
+				
+			}
+			
+			if(user.getEmail()!=null) {
+				oldUser.setEmail(user.getEmail());
+			}
+			return null;
 		}
 		
 		@DeleteMapping("users/{userId}")
