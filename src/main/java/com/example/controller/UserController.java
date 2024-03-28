@@ -103,8 +103,11 @@ if(user.isPresent()) {
 			if(user.getEmail()!=null) {
 				oldUser.setEmail(user.getEmail());
 			}
-			return null;
+			User updatedUser = userRepository.save(oldUser);
+			
+			return updatedUser;
 		}
+		
 		
 		@DeleteMapping("users/{userId}")
 		public String deleteUser(@PathVariable("userId")int userid ) {
