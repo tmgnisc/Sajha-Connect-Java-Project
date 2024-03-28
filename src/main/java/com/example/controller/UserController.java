@@ -110,8 +110,15 @@ if(user.isPresent()) {
 		
 		
 		@DeleteMapping("users/{userId}")
-		public String deleteUser(@PathVariable("userId")int userid ) {
-			return "user deleted successfully with id " +userid; 
+		public String deleteUser(@PathVariable("userId")int userId ) throws Exception {
+			
+			Optional<User> user = userRepository.findById(userId);
+			if(user.isEmpty()) {
+				throw new Exception("user not exist with id" +userId);
+			}
+			
+			userRepository.delete(user.get());
+			return "user deleted successfully with id " +userId; 
 		}
 		
 }
