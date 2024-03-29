@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +32,15 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public User finUserById(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findUserById(int userId) throws Exception {
+		Optional<User> user = userRepository.findById(userId);
+
+		if(user.isPresent()) {
+			return user.get();
+		}
+				
+			
+				throw new Exception("user not exit with this id"+userId);
 	}
 
 	@Override
@@ -59,5 +66,9 @@ public class UserServiceImplementation implements UserService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	
 
 }
