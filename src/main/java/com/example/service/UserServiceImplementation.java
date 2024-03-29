@@ -57,7 +57,11 @@ public class UserServiceImplementation implements UserService{
 		user2.getFollowers().add(user1.getId()); //first user ko id yesma add gardinxa 
 		//first user le second user lai follow garxa vane 
 		user1.getFollowings().add(user2.getId());
-		return null;
+		
+		//dubai lai save garnu paryo
+		userRepository.save(user1);
+		userRepository.save(user2);
+		return user1;
 	}
 
 	@Override
