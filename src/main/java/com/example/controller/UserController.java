@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.User;
 import com.example.repository.UserRepository;
+import com.example.service.UserService;
 
 @RestController
 @ComponentScan("com.example")	
@@ -23,6 +24,8 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserService userService;
 	
 	//data sent garda body ma data send garxam...
 	//yo data chai database ma add garna paryo
@@ -30,14 +33,15 @@ public class UserController {
 	//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
 	@PostMapping("/users")
 	public User createUser(@RequestBody User user) {
-		User newUser=new User();
-		newUser.setEmail(user.getEmail());
-		newUser.setFirstName(user.getFirstName());
-		newUser.setLastName(user.getLastName());
-		newUser.setPassword(user.getPassword());
-		newUser.setId(user.getId());
+//		User newUser=new User();
+//		newUser.setEmail(user.getEmail());
+//		newUser.setFirstName(user.getFirstName());
+//		newUser.setLastName(user.getLastName());
+//		newUser.setPassword(user.getPassword());
+//		newUser.setId(user.getId());
 		
-		User savedUser=userRepository.save(newUser);
+//		User savedUser=userRepository.save(newUser);
+		User savedUser = userService.registerUser(user);  //yo registeruser ko logic service ma lekhekoxu
 		return savedUser;
 		
 	}
