@@ -47,11 +47,16 @@ public class UserServiceImplementation implements UserService{
 	public User findUserByEmail(String email) {
 		User user= userRepository.findByEmail(email);
 		return user; 
-	}
+	}	
 
 	@Override
-	public User followUser(int userId1, int userId2) {
-		// TODO Auto-generated method stub
+	public User followUser(int userId1, int userId2) throws Exception{
+		User user1 = findUserById(userId1);
+		User user2= findUserById(userId2);
+		//update hunxa user2 ma ani followers add gardinxa 
+		user2.getFollowers().add(user1.getId()); //first user ko id yesma add gardinxa 
+		//first user le second user lai follow garxa vane 
+		user1.getFollowings().add(user2.getId());
 		return null;
 	}
 
