@@ -58,14 +58,7 @@ public class UserController {
 		@GetMapping("/users/{userId}")
 		public User getUserById(@PathVariable("userId")int id) throws Exception{
 		
-	Optional<User> user = userRepository.findById(id);
 
-if(user.isPresent()) {
-	return user.get();
-}
-		
-	
-		throw new Exception("user not exit with userid"+id);
 		
 	}
 		
