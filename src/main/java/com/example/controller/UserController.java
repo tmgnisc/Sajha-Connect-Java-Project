@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.User;
@@ -74,16 +75,29 @@ public class UserController {
 		}
 		
 		
-		@DeleteMapping("users/{userId}")
-		public String deleteUser(@PathVariable("userId")int userId ) throws Exception {
+//		@DeleteMapping("users/{userId}")
+//		public String deleteUser(@PathVariable("userId")int userId ) throws Exception {
+//			
+//			Optional<User> user = userRepository.findById(userId);
+//			if(user.isEmpty()) {
+//				throw new Exception("user not exist with id" +userId);
+//			}
+//			
+//			userRepository.delete(user.get());
+//			return "user deleted successfully with id " +userId; 
+//		}
+		
+		@PutMapping("/users/{userId1}/{userId2}")
+		public User followUserHandler(@PathVariable int userId1, @PathVariable int userId2) throws Exception {
+			User user = userService.followUser(userId1, userId2); 
 			
-			Optional<User> user = userRepository.findById(userId);
-			if(user.isEmpty()) {
-				throw new Exception("user not exist with id" +userId);
-			}
+			return user;
+		}
+		
+		public List<User> searchUser(@RequestParam("query")String query){
 			
-			userRepository.delete(user.get());
-			return "user deleted successfully with id " +userId; 
+			List<User> users = userService.searchuser(query);
+			return users;
 		}
 		
 }
