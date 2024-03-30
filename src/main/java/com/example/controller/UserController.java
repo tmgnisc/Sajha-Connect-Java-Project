@@ -94,6 +94,7 @@ public class UserController {
 			return user;
 		}
 		
+		@GetMapping("/users/search")
 		public List<User> searchUser(@RequestParam("query")String query){
 			
 			List<User> users = userService.searchuser(query);
