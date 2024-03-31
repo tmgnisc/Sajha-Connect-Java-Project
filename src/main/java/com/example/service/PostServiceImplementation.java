@@ -32,14 +32,22 @@ public class PostServiceImplementation implements PostService{
 	}
 
 	@Override
-	public String deletePost(int postId, int userId) {
+	public String deletePost(int postId, int userId) throws Exception {
+		Post post = findPostById(postId);
+		User user = userService.findUserById(userId);
+		//post delete logic of using id
+		if(post.getUser().getId()!=user.getId()) {
+			throw new Exception("you can't delete another users post");
+		}
 		
-		return null;
+		postRepository.delete(post);
+		return "post deleted successfully";
+		
 	}
 
 	@Override
 	public List<Post> findPostByUserId(int userId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
