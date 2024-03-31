@@ -48,22 +48,16 @@ public class PostServiceImplementation implements PostService{
 	@Override
 	public List<Post> findPostByUserId(int userId) {
 		
-		return null;
+		return postRepository.findPostByUserId(userId);
 	}
 
-	@Override
-	public Post findPostByid(int postId) throws Exception {
-		Optional<Post> opt = postRepository.findById(postId);
-		if(opt.isEmpty()) {
-			throw new Exception("post does not exist on given id"+postId);
-		}
-		return opt.get();
-	}
+
+
 
 	@Override
 	public List<Post> findAllPost() {
 		// TODO Auto-generated method stub
-		return null;
+		return postRepository.findAll();
 	}
 
 	@Override
@@ -76,6 +70,15 @@ public class PostServiceImplementation implements PostService{
 	public Post likePost(int postId, int userId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Post findPostById(int postId) throws Exception {
+		Optional<Post> opt = postRepository.findById(postId);
+		if(opt.isEmpty()) {
+			throw new Exception("post does not exist on given id"+postId);
+		}
+		return opt.get();
 	}
 
 }
