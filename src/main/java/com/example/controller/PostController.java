@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ApiResponse;
 import com.example.model.Post;
 import com.example.service.PostService;
 
@@ -31,10 +32,10 @@ public class PostController {
 	//delete post method
 	
 	@DeleteMapping("/posts/{postId}/user/{userId}")
-	public ResponseEntity<String> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception{
+	public ResponseEntity<ApiResponse> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception{
 		
 		String message= postService.deletePost(postId, userId);
-		
-		return null;
+		ApiResponse res = new ApiResponse(message, true);
+		return new ResponseEntity<ApiResponse>(res, HttpStatus.OK);
 	}
 }
