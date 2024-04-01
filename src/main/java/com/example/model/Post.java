@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Post {
@@ -20,7 +21,13 @@ public class Post {
     private String caption;
     private String image;
     private String video;
+    
+    //entity relationship mapping
+    //euta post ko euta user hunxa multiple user hudaina 
+    //one user xa multiple post xa   //multiple post create garna sakxa euta user le
+    @ManyToOne
     private User user;
+    
     private List<User> liked=new ArrayList<>();
     private LocalDateTime createdAt;
     
