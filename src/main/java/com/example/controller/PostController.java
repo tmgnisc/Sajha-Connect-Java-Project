@@ -34,6 +34,7 @@ public class PostController {
 	public ResponseEntity<String> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception{
 		
 		String message= postService.deletePost(postId, userId);
+		
 		return null;
 	}
 }
