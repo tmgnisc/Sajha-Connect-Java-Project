@@ -1,4 +1,4 @@
-package com.example;
+package com.example.response;
 
 public class ApiResponse {
 
