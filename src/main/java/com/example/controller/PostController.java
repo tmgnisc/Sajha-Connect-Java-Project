@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +47,11 @@ public class PostController {
 	public ResponseEntity<Post> findPostByIdHandler(@PathVariable int postId) throws Exception{
 		Post post = postService.findPostById(postId);
 		return new ResponseEntity<Post>(post, HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/posts/user/{userId}")
+	public ResponseEntity<List<Post>>findUserPost(@PathVariable int userId){
+		List<Post> posts = postService.findPostByUserId(userId);
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 }
