@@ -22,6 +22,13 @@ public class jwtValidator extends OncePerRequestFilter {
 		//so tesko lagi suru ma yesle token nikalxa
 		String jwt =request.getHeader(JwtConstant.JWT_HEADER);   //authorization dherai use garxam so yeslai variable ma add garxam
 		
+		if(jwt!=null) {
+			try {
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 		
 	}
 
