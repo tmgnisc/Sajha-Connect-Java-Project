@@ -1,7 +1,13 @@
 package com.example.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import jakarta.servlet.Filter;
@@ -24,7 +30,16 @@ public class jwtValidator extends OncePerRequestFilter {
 		
 		if(jwt!=null) {
 			try {
+				String email=JwtProvider.getEmailFromJwtToken(jwt); 
+				List<GrantedAuthority> authorities = new ArrayList<>();
 				
+				//authentication create garxam aba
+				
+				Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
+				//security context holder ma save garne
+				
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+						
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
