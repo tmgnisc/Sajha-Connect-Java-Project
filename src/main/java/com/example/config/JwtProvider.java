@@ -6,6 +6,7 @@ import javax.crypto.SecretKey;
 
 import org.springframework.security.core.Authentication;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -27,5 +28,15 @@ public class JwtProvider {
 				 .signWith(key)
 				 .compact();
 		return jwt;
+	}
+	
+	public static String getEmailFromJwtToken(String jwt) {
+		//jwt token Bearer kejejejejejejeje yesto format ma hunxa 
+		//aba yesma feri Bearer vanne keyword chai chaidaina
+		
+		jwt = jwt.substring(7) ; //yesle k garxa vanda first 7 letter lai skip gardinxa tyo vaneko Bearer keyword lai skip garera tespaxi ko chai linxa
+		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();		
+		
+		
 	}
 }
