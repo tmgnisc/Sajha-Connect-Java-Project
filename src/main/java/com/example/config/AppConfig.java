@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -24,8 +25,9 @@ public class AppConfig {
 	//simple vannu parda password username jasto kam garxa
 	
 	.authorizeHttpRequests(Authorize -> Authorize 
-			.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-
+			.requestMatchers("/api/**").authenticated()   //authenticate garna lai chai token header ma auxa 
+			.anyRequest().permitAll())
+.addFilterBefore(new jwtValidator(), BasicAuthenticationFilter.class)    //tyo endpoint ma janu agadi user authenticate ho ki haina check garna banako method
 	.csrf(csrf-> csrf.disable());
 		
 		return http.build();

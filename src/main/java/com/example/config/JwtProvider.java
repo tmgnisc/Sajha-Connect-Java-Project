@@ -37,6 +37,9 @@ public class JwtProvider {
 		jwt = jwt.substring(7) ; //yesle k garxa vanda first 7 letter lai skip gardinxa tyo vaneko Bearer keyword lai skip garera tespaxi ko chai linxa
 		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();		
 		
+		String email=String.valueOf(claims.get("email"));   //email nikaleko
+		
+		return email;
 		
 	}
 }
