@@ -11,7 +11,12 @@ public class AppConfig {
 
 	
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-	
+		//jati pani hamro api hunxa end point yedi tyo /api bata suru hunxa vane teslai authenicated garne
+		//anyrequest permit all ko matlab api ko end point bata start vako lai authenticate garem....
+		//tara baki jati pani api xa jun yo end point bata suru xaina suppose /users yiniharu lai chai permit gareko xam 
+		//arule chai yiniharu lai access garna milxa
+	http.authorizeHttpRequests(Authorize -> Authorize 
+			.requestMatchers("/api/**").authenticated().anyRequest().permitAll()).csrf(csrf-> csrf.disable());
 		
 		return http.build();
 	}
