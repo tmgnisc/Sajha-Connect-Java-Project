@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +25,11 @@ public class User {
 	private List<Integer> followers=new ArrayList<>();
 	private List<Integer> followings= new ArrayList<>();
 	
+	
+	//euta user le multiple post lai save garna sakxa
+	//euta post lai multiple user le save garna sakxa
+	
+	@ManyToMany
 	private List<Post> savedPost= new ArrayList<>();
 	
 	

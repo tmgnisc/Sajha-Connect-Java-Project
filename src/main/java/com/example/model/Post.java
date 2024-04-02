@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -25,10 +26,19 @@ public class Post {
     //entity relationship mapping
     //euta post ko euta user hunxa multiple user hudaina 
     //one user xa multiple post xa   //multiple post create garna sakxa euta user le
+    
     @ManyToOne
     private User user;
     
+    
+    //euta post lai multiple user le like garna sakxa
+    //tara euta user le ekchoti matra like garna milxa multiple choti eutai post lai like garna mildaina
+    //tara euta post vitra multiple user le like garna milxa
+  //one post xa multiple user le like garna milxa
+    
+    @OneToMany     
     private List<User> liked=new ArrayList<>();
+    
     private LocalDateTime createdAt;
     
     
