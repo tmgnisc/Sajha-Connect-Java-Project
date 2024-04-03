@@ -63,11 +63,14 @@ public class AuthController {
 		return res;
 		
 	}
-	
+	//auth/signin
+	@PostMapping("/signin")
 	public AuthResponse signin(@RequestBody LoginRequest loginRequest ) {
 		
 		Authentication authentication = authenticate(loginRequest.getEmail(), loginRequest.getPassword());
-		return null;
+		String token = JwtProvider.generateToken(authentication);
+		AuthResponse res = new AuthResponse(token, "Login Success");
+		return res;
 	}
 	
 	private Authentication authenticate(String email, String password) {
