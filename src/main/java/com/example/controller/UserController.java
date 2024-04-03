@@ -53,12 +53,15 @@ public class UserController {
 	}
 		
 
+		//update ko lagi maile userid hatako xu kina ki afno profile matra update garna paryo ni ta aba maile endpoint ma userid dekheko 
+		//xu vane ta url bata feri aru ko userid hanera pani ta edit garna sakxan testo garnu ta vayena tesaile /api/users/userid hatako
 		
+		@PutMapping("/api/users")
+		public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws Exception  {
+			 User reqUser = userService.findUserByJwt(jwt);
 		
-		@PutMapping("/api/users/{userId}")
-		public User updateUser(@RequestBody User user, @PathVariable int userId) throws Exception {
-			User updatedUser = userService.updateUser(user, userId);
-			return updatedUser;
+			User updatedUser = userService.updateUser(user, reqUser.getId());    //aba yeta ko userid chai jwt token bata lyauxa
+			return updatedUser;  
 		
 		}
 		
@@ -92,9 +95,15 @@ public class UserController {
 		@GetMapping("/api/users/profile")
 		public User getUserFromToken(@RequestHeader("Authorization") String jwt) {
 			
-			System.out.println("jwt------------"+jwt);
+	//		String email = 
+		//	System.out.println("jwt------------"+jwt);
 			
-			return null;
+			User user = userService.findUserByJwt(jwt);
+			
+			//frontend ma password pathaune haina
+			
+			user.setPassword(null);
+			return user;
 		}
 		
 }
