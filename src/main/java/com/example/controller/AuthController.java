@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.config.JwtProvider;
 import com.example.model.User;
 import com.example.service.UserService;
 import com.example.repository.UserRepository;
+import com.example.response.AuthResponse;
 
 @RestController
 public class AuthController {
@@ -25,7 +27,7 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/users")
-	public User createUser(@RequestBody User user) throws Exception {
+	public AuthResponse createUser(@RequestBody User user) throws Exception {
 		//email already use vako xa ki xaina check garna validation
 		
 		User isExist = userRepository.findByEmail(user.getEmail());
@@ -43,7 +45,9 @@ public class AuthController {
 		User savedUser=userRepository.save(newUser);
 		
 		//token generate garnu paryo user create vayesi
-		Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+		Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
+		
+		String token = JwtProvider.generateToken(authentication);  //yo generate vako token frontend ma pass garnu parxa
 		
 		return savedUser;
 		
