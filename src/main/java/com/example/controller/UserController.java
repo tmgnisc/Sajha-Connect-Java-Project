@@ -32,20 +32,7 @@ public class UserController {
 	//yo data chai database ma add garna paryo
 //vane tyo data access garna ko lagi yo annotation use garxam
 	//frontend bata data add garna khojda data dinxam frontend bata tyo data yesari access garxam
-	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
-//		User newUser=new User();
-//		newUser.setEmail(user.getEmail());
-//		newUser.setFirstName(user.getFirstName());
-//		newUser.setLastName(user.getLastName());
-//		newUser.setPassword(user.getPassword());
-//		newUser.setId(user.getId());
-		
-//		User savedUser=userRepository.save(newUser);
-		User savedUser = userService.registerUser(user);  //yo registeruser ko logic service ma lekhekoxu
-		return savedUser;
-		
-	}
+	
 	
 	
 	@GetMapping("/api/users")
