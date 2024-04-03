@@ -12,7 +12,7 @@ import io.jsonwebtoken.security.Keys;
 
 public class JwtProvider {
 
-	private static SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
+	private static SecretKey key=Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 	//aba yo key ko use hami token generate garna garxam
 	
 	
@@ -36,7 +36,7 @@ public class JwtProvider {
 		
 		jwt = jwt.substring(7) ; //yesle k garxa vanda first 7 letter lai skip gardinxa tyo vaneko Bearer keyword lai skip garera tespaxi ko chai linxa
 		
-		Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();		
+		Claims claims = Jwts.parser().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
 		
 		String email=String.valueOf(claims.get("email"));   //email nikaleko
 		

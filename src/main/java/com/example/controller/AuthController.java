@@ -6,15 +6,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.config.JwtProvider;
 import com.example.model.User;
 import com.example.service.UserService;
 import com.example.repository.UserRepository;
+import com.example.request.LoginRequest;
 import com.example.response.AuthResponse;
+import com.example.service.CustomUserDetailsService;
 
 @RestController
+@RequestMapping("/auth")    //kunai pani requestmapping ma end point dinxam ni yo vitra jati pani chij xa api tesko agadi ko endpoint auth hunxa 
 public class AuthController {
 
 	@Autowired
@@ -26,7 +30,10 @@ public class AuthController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@PostMapping("/users")
+	@Autowired
+	private CustomUserDetailsService customUserDetails;
+	
+	@PostMapping("/signup")
 	public AuthResponse createUser(@RequestBody User user) throws Exception {
 		//email already use vako xa ki xaina check garna validation
 		
@@ -49,7 +56,22 @@ public class AuthController {
 		
 		String token = JwtProvider.generateToken(authentication);  //yo generate vako token frontend ma pass garnu parxa
 		
-		return savedUser;
+		AuthResponse res = new AuthResponse(token, "Register_Success");
 		
+		return res;
+		
+	}
+	
+	public AuthResponse signin(@RequestBody LoginRequest loginRequest ) {
+		
+		Authentication authentication = authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+		return null;
+	}
+	
+	private Authentication authenticate(String email, String password) {
+		
+		UserDetails userDetails = customUserDetails.loadUserByUsername(email);
+		
+		return null;
 	}
 }
