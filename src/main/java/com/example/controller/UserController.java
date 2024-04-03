@@ -78,9 +78,11 @@ public class UserController {
 //			return "user deleted successfully with id " +userId; 
 //		}
 		
-		@PutMapping("/api/users/follow/{userId1}/{userId2}")
-		public User followUserHandler(@PathVariable int userId1, @PathVariable int userId2) throws Exception {
-			User user = userService.followUser(userId1, userId2); 
+		@PutMapping("/api/users/follow/{userId2}")
+		public User followUserHandler(@RequestHeader("Authorization") String jwt, @PathVariable int userId2) throws Exception {
+			
+			User reqUser = userService.findUserByJwt(jwt);
+			User user = userService.followUser(reqUser.getId(), userId2);
 			
 			return user;
 		}
