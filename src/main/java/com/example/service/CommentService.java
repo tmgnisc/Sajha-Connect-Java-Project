@@ -9,6 +9,6 @@ public interface CommentService {
 	
 	
 	public Comment findCommentById(int commentId) throws Exception;
-	public Comment likeComment(int CommentId, int userId);
+	public Comment likeComment(int CommentId, int userId) throws Exception;
 	
 }
