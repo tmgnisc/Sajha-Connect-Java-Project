@@ -8,5 +8,5 @@ import com.example.model.User;
 public interface StoryService {
 
 	public Story createStory(Story story, User user);
-	public List<Story> findStoryByUserId(int userId);
+	public List<Story> findStoryByUserId(int userId) throws Exception;
 }
