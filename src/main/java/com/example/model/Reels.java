@@ -12,7 +12,7 @@ public class Reels {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	private String title;
 	private String video;
 	
@@ -26,7 +26,7 @@ public class Reels {
 	}
 
 
-	public Reels(Long id, String title, String video, User user) {
+	public Reels(int id, String title, String video, User user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -35,12 +35,12 @@ public class Reels {
 	}
 
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
