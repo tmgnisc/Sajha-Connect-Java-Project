@@ -41,6 +41,9 @@ public class Post {
     
     private LocalDateTime createdAt;
     
+    //comment thapyo
+    private List<Comment> comments = new ArrayList<>();
+    
     
     public Post() {
     	
@@ -48,8 +51,12 @@ public class Post {
     
 	
 
+
+
+
+
 	public Post(int id, String caption, String image, String video, User user, List<User> liked,
-			LocalDateTime createdAt) {
+			LocalDateTime createdAt, List<Comment> comments) {
 		super();
 		this.id = id;
 		this.caption = caption;
@@ -58,7 +65,12 @@ public class Post {
 		this.user = user;
 		this.liked = liked;
 		this.createdAt = createdAt;
+		this.comments = comments;
 	}
+
+
+
+
 
 
 
@@ -110,6 +122,27 @@ public class Post {
 	public void setLiked(List<User> liked) {
 		this.liked = liked;
 	}
+
+
+
+
+
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+
+
+
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 	
     
