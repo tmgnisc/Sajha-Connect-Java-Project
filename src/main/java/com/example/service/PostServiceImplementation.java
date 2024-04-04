@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +27,12 @@ public class PostServiceImplementation implements PostService{
 		Post newPost = new Post();
 	     newPost.setCaption(post.getCaption());
 	     newPost.setImage(post.getImage());
-	     //error coming here 
-//	     newPost.setCreatedAt(new LocalDateTime.now(zoneId));
+	 
+	  newPost.setCreatedAt(LocalDateTime.now());
 	     newPost.setVideo(post.getVideo());
 	     newPost.setUser(user);
 	     
-		return newPost;
+		return postRepository.save(newPost);
 	}
 
 	@Override

@@ -41,10 +41,10 @@ public class PostController {
 	
 	//delete post method
 	
-	@DeleteMapping("/posts/{postId}/user/{userId}")
-	public ResponseEntity<ApiResponse> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception{
-		
-		String message= postService.deletePost(postId, userId);
+	@DeleteMapping("/posts/{postId}")
+	public ResponseEntity<ApiResponse> deletePost(@RequestHeader("Authorization") String jwt, @PathVariable int postId) throws Exception{
+		User reqUser = userService.findUserByJwt(jwt);
+		String message= postService.deletePost(postId, reqUser.getId());
 		ApiResponse res = new ApiResponse(message, true);
 		return new ResponseEntity<ApiResponse>(res, HttpStatus.OK);
 	}
@@ -70,15 +70,19 @@ public class PostController {
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 	
-	@PutMapping("/posts/{postId}/user/{userId}")
-	public ResponseEntity<Post> savedPostHandler(@PathVariable int postId, @PathVariable int userId) throws Exception{
-		Post post = postService.savedPost(postId, userId);
+	@PutMapping("/posts/save/{postId}")
+	public ResponseEntity<Post> savedPostHandler(@PathVariable int postId, @RequestHeader("Authorization") String jwt ) throws Exception{
+		
+		User reqUser = userService.findUserByJwt(jwt);
+		Post post = postService.savedPost(postId, reqUser.getId());
 		return new ResponseEntity<Post>(post, HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping("/posts/like/{postId}/user/{userId}")
-	public ResponseEntity<Post> likePostHandler(@PathVariable int postId, @PathVariable int userId) throws Exception{
-		Post post = postService.likePost(postId, userId);
+	@PutMapping("/posts/like/{postId}")
+	public ResponseEntity<Post> likePostHandler(@PathVariable int postId, @RequestHeader("Authorization") String jwt) throws Exception{
+		
+		User reqUser = userService.findUserByJwt(jwt);
+		Post post = postService.likePost(postId, reqUser.getId());
 		return new ResponseEntity<Post>(post, HttpStatus.ACCEPTED);
 	}
 }
