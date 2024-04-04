@@ -3,6 +3,8 @@ package com.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,8 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	
 	private String password;
 	private String gender;
 	private List<Integer> followers=new ArrayList<>();

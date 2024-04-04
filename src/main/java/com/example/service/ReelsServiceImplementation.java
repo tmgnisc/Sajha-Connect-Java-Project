@@ -25,7 +25,8 @@ public class ReelsServiceImplementation implements ReelsService{
 		
 		
 		createReel.setTitle(reel.getTitle());
-		createReel.setUser(reel.getUser());
+//		createReel.setUser(reel.getUser());
+		createReel.setUser(user);
 		createReel.setVideo(reel.getVideo());
 		return reelsRepository.save(createReel);
 	}
