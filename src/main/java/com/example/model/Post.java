@@ -42,6 +42,8 @@ public class Post {
     private LocalDateTime createdAt;
     
     //comment thapyo
+    //euta post ma multiple comment auna sakxa tara euta comment vaneko euta post ko lagi generate hunxa
+    @OneToMany
     private List<Comment> comments = new ArrayList<>();
     
     

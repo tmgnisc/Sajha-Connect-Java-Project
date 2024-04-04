@@ -4,6 +4,7 @@ package com.example.service;
 import com.example.service.PostService;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,7 @@ import com.example.model.Comment;
 import com.example.model.Post;
 import com.example.model.User;
 import com.example.repository.CommentRepository;
+import com.example.repository.PostRepository;
 
 public class CommentServiceImplementation implements CommentService {
 
@@ -23,6 +25,9 @@ public class CommentServiceImplementation implements CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
+	@Autowired
+	private PostRepository postRepository;
+	
 	@Override
 	public Comment createComment(Comment comment, int postId, int userId) throws Exception {
 	
@@ -33,13 +38,23 @@ public class CommentServiceImplementation implements CommentService {
 		comment.setContent(comment.getContent());
 		comment.setCreatedAt(LocalDateTime.now());
 		Comment savedComment = commentRepository.save(comment);
-		return null;
+		post.getComments().add(savedComment);
+		postRepository.save(post);
+		
+		return savedComment;
 	}
 
 	@Override
-	public Comment findCommentById(int commentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Comment findCommentById(int commentId) throws Exception {
+		
+		Optional<Comment> opt = commentRepository.findById(commentId);
+		
+		if(opt.isEmpty()) {
+			throw new Exception("Comment not Exist");
+			
+		}
+		
+		return opt.get();
 	}
 
 	@Override
