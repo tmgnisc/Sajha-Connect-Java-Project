@@ -3,9 +3,10 @@ import { navigationMenu } from "./SidebarNavigation";
 import { Avatar, Button, Card, Divider, Menu, MenuItem } from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MoreVert from "@mui/icons-material/MoreVert";
-
+import {useSelector} from "react-redux"
 
 const Sidebar = () => {
+  const {auth}=useSelector(store=>store);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -31,8 +32,8 @@ const Sidebar = () => {
         <div className="flex items-center space-x-3 ">
           <Avatar src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"/>
          <div>
-          <p className="font-bold">Nischal tamang</p>
-          <p className="opacity-70">@CodeWithPororo</p>
+          <p className="font-bold">{auth.user?.firstName+" " + auth.user?.lastName}</p>
+          <p className="opacity-70">@{auth.user?.firstName.toLowerCase()+" " + auth.user?.lastName.toLowerCase()}</p>
          </div>
           
         </div>
