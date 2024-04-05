@@ -20,7 +20,9 @@ dispatch(getProfileAction(jwt))
   return (
     <div className="">
       <Routes>
-        <Route path="/*" element={auth.user?<HomePage />:<Authentication/>} />
+        <Route path="/" element={auth.user?<HomePage />:<Authentication/>} />  
+
+ 
         <Route path="/message" element={<Message />} />
         <Route path="/*" element={<Authentication />} />
       </Routes>
