@@ -23,7 +23,7 @@ public class Message {
 	@ManyToOne
 	private User user;
 	
-	@JsonIgnore
+	@JsonIgnore   //nested hunxa issue auxa so yo rakheko ignore garna lai 
 	@ManyToOne
 	private Chat chat;
 	
