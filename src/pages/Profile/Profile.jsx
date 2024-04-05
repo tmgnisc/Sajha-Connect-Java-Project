@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Avatar, Box, Button, Card, Tab, Tabs } from "@mui/material";
 import PostCard from "../../components/Post/PostCard";
 import UserReelCard from "../../components/Reels/UserReelCard";
+import {useSelector} from "react-redux"
 
 const tabs = [
   { value: "post", name: "Post" },
@@ -21,6 +22,7 @@ const Profile = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const {auth}=useSelector(store=>store);
   return (
     <Card className="my-10 w-[70%]">
       <div className="rounded-md">
@@ -48,8 +50,8 @@ const Profile = () => {
         </div>
         <div className="p-5">
           <div>
-            <h1 className="py-1 font-bold text-xl">Nischal Tamang</h1>
-            <p>@codeWithPororo</p>
+            <h1 className="py-1 font-bold text-xl">{auth.user?.firstName +" "+auth.user.lastName}</h1>
+            <p>@{auth.user?.firstName.toLowerCase()+"_"+auth.user.lastName.toLowerCase()}</p>
           </div>
           <div className="flex gap-2 items-center py-3">
             <span>40 post</span>
