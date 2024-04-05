@@ -23,7 +23,7 @@ public class Message {
 	@ManyToOne
 	private User user;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToOne
 	private Chat chat;
 	

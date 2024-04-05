@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.model.Chat;
 import com.example.model.Message;
 import com.example.model.User;
+import com.example.repository.ChatRepository;
 import com.example.repository.MessageRepository;
 
+@Service
 public class MessageServiceImplementation implements MessageService {
 	
 	@Autowired
@@ -17,6 +20,9 @@ public class MessageServiceImplementation implements MessageService {
 	
 	@Autowired
 	private ChatService chatService;
+	
+	@Autowired
+	private ChatRepository chatRepository;
 
 	@Override
 	public Message createMessage(User user, int chatId, Message req) throws Exception {
@@ -27,7 +33,11 @@ public class MessageServiceImplementation implements MessageService {
 			message.setImage(req.getImage());
 			message.setUser(user);
 			message.setTimestamp(LocalDateTime.now());
-		return messageRepository.save(message);
+			Message savedMessage = messageRepository.save(message);
+			
+			chat.getMessages().add(savedMessage);
+			chatRepository.save(chat);
+		return savedMessage;
 	}
 
 	@Override
