@@ -12,7 +12,7 @@ import {
   UPDATE_PROFILE_SUCCESS,  
 } from "./auth.actionType";
 
-export const LoginUserAction = (LoginData) => async (dispatch) => {
+export const LoginUserAction = (LoginData) => async (dispatch)=>{
   dispatch({ type: LOGIN_REQUEST });
   try {
     const { data } = await axios.post(
@@ -22,9 +22,10 @@ export const LoginUserAction = (LoginData) => async (dispatch) => {
 
     
 
-    if (data.jwt) {
-      localStorage.setItem("jwt", data.jwt);
+    if (data.token) {
+      localStorage.setItem("jwt", data.token);
     }
+    console.log("login suceess", data);
     dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
   } catch (error) {
     console.log("----------", error);
@@ -40,8 +41,8 @@ export const registerUserAction = (LoginData) => async (dispatch) => {
       LoginData.data
     );
 
-    if (data.jwt) {
-      localStorage.setItem("jwt", data.jwt);
+    if (data.token) {
+      localStorage.setItem("jwt", data.token);
       console.log("login vayo hai ta", data);
     }
 

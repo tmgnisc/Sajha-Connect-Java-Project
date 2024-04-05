@@ -16,9 +16,7 @@ const HomePage = () => {
   const location = useLocation();
   const jwt=localStorage.getItem("jwt")   
   const {auth}=useSelector(store=>store);
-  useEffect(()=>{
-dispatch(getProfileAction(jwt))
-  },[])
+
   return (
     <div className="px-20">
       <Grid container spacing={0}>
