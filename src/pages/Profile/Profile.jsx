@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Button, Card, Tab, Tabs } from "@mui/material";
 import PostCard from "../../components/Post/PostCard";
 import UserReelCard from "../../components/Reels/UserReelCard";
 import {useSelector} from "react-redux"
+import ProfileModal from "./ProfileModal";
 
 const tabs = [
   { value: "post", name: "Post" },
@@ -17,6 +18,9 @@ const reels = [1, 1, 1, 1];
 const savedPost = [1,1,1,1]
 const Profile = () => {
   const { id } = useParams();
+  const[open, setOpen] = useState(false)
+  const handleOpenProfileModal = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   const [value, setValue] = React.useState("post");
 
   const handleChange = (event, newValue) => {
@@ -102,6 +106,9 @@ const Profile = () => {
               <div>repost</div>
             )}
           </div>
+        </section>
+        <section>
+          <ProfileModal open={open} handleClose={handleClose}/>
         </section>
       </div>
     </Card>
