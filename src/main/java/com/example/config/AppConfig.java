@@ -58,7 +58,13 @@ public class AppConfig {
 				cfg.setAllowedOrigins(Arrays.asList(
                         "http://localhost:3000/"));
 				cfg.setAllowedMethods(Collections.singletonList("*"));
-				return null;
+				cfg.setAllowCredentials(true);
+				cfg.setAllowedHeaders(Collections.singletonList("*"));
+				cfg.setExposedHeaders(Arrays.asList(
+                        "Authorization"));
+				cfg.setMaxAge(3600L);
+				
+				return cfg;
 			}
 		};
 	}
