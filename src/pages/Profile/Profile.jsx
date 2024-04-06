@@ -5,6 +5,8 @@ import PostCard from "../../components/Post/PostCard";
 import UserReelCard from "../../components/Reels/UserReelCard";
 import {useSelector} from "react-redux"
 import ProfileModal from "./ProfileModal";
+// import {useDispatch} from "react-redux"
+// import {updateProfileAction} from "../../Redux/Auth/auth.action"
 
 const tabs = [
   { value: "post", name: "Post" },
@@ -23,10 +25,12 @@ const Profile = () => {
   const handleClose = () => setOpen(false)
   const [value, setValue] = React.useState("post");
 
+  const {auth}=useSelector(store=>store);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const {auth}=useSelector(store=>store);
+
+
   return (
     <Card className="my-10 w-[70%]">
       <div className="rounded-md">
@@ -55,7 +59,7 @@ const Profile = () => {
         <div className="p-5">
           <div>
             <h1 className="py-1 font-bold text-xl">{auth.user?.firstName +" "+auth.user.lastName}</h1>
-            <p>@{auth.user?.firstName.toLowerCase()+"_"+auth.user.lastName.toLowerCase()}</p>
+            <p>@{auth.user?.firstName?.toLowerCase()+"_"+auth.user.lastName?.toLowerCase()}</p>
           </div>
           <div className="flex gap-2 items-center py-3">
             <span>40 post</span>
@@ -107,10 +111,11 @@ const Profile = () => {
             )}
           </div>
         </section>
-        <section>
+      
+      </div>
+      <section>
           <ProfileModal open={open} handleClose={handleClose}/>
         </section>
-      </div>
     </Card>
   );
 };

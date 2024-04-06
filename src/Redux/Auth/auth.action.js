@@ -63,7 +63,7 @@ export const getProfileAction = (jwt) => async (dispatch) => {
       },
     });
 
-    console.log("profile setup ", data);
+    console.log("profile--- ", data);
     dispatch({ type: GET_PROFILE_SUCCESS, payload: data });
   } catch (error) {
     console.log("----------", error);
