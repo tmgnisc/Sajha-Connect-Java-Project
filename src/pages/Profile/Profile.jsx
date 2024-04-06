@@ -59,7 +59,7 @@ const Profile = () => {
         <div className="p-5">
           <div>
             <h1 className="py-1 font-bold text-xl">{auth.user?.firstName +" "+auth.user.lastName}</h1>
-            <p>@{auth.user?.firstName?.toLowerCase()+"_"+auth.user.lastName?.toLowerCase()}</p>
+            <p>@{auth.user?.firstName.toLowerCase()+"_"+auth.user.lastName.toLowerCase()}</p>
           </div>
           <div className="flex gap-2 items-center py-3">
             <span>40 post</span>
