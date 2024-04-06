@@ -45,7 +45,7 @@ const Profile = () => {
           />
 
           {true ? (
-            <Button sx={{ borderRadius: "20px" }} variant="outlined">
+            <Button sx={{ borderRadius: "20px" }} variant="outlined" onClick={handleOpenProfileModal}>
               Edit Profile
             </Button>
           ) : (
