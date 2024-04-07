@@ -9,6 +9,7 @@ import PostCard from "../Post/PostCard";
 import CreatePostModal from "../CreatePost/CreatePostModal";
 import { useState } from "react";
 
+
 const story = [11, 1, 1, 1, 1];
 const posts=[1,1,1,1,1]
 

@@ -1,7 +1,11 @@
-import React from "react";
-import { Box, Modal, Avatar, IconButon } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Modal, Avatar, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Formik, useFormik } from "formik";
+import ImageIcon from '@mui/icons-material/Image';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
+
+
 
 const style = {
   position: "absolute",
@@ -19,6 +23,14 @@ const style = {
 
 const CreatePostModal = ({ handleClose, open }) => {
   const formik = useFormik();
+  const [selectedImage, setSelectedImage]=useState();
+  const [selectedVideo, setSelectedVideo]=useState();
+  const handleSelectImage=()=>{
+setSelectedImage("")
+  }
+  const handleSelectVideo=()=>{
+
+  }
   return (
     <Modal
       open={open}
@@ -41,11 +53,24 @@ const CreatePostModal = ({ handleClose, open }) => {
 
   <div>
     <input type="file" accept="image/*" onChange={handleSelectImage} style={{display:"none"}} id="image-input" />
-    <label htmlFor="image-input"></label>
-    <IconButon>
+    <label htmlFor="image-input">
+    <IconButton color="primary">
 
+<ImageIcon/>
+</IconButton>
+    </label>
+   <span>Image</span>
+  </div>
+  <div>
+    <input type="file" accept="video/*" onChange={handleSelectVideo} style={{display:"none"}} id="video-input" />
+    <label htmlFor="video-input">
+   <IconButton color="primary">
 
-    </IconButon>
+<VideoCallIcon/>
+</IconButton>
+
+    </label>
+   <span>Video</span>
   </div>
 </div>
 
