@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Modal, Avatar, IconButton } from "@mui/material";
+import { Box, Modal, Avatar, IconButton, Backdrop, CircularProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Formik, useFormik } from "formik";
 import ImageIcon from '@mui/icons-material/Image';
@@ -22,15 +22,27 @@ const style = {
 };
 
 const CreatePostModal = ({ handleClose, open }) => {
-  const formik = useFormik();
+
   const [selectedImage, setSelectedImage]=useState();
   const [selectedVideo, setSelectedVideo]=useState();
+  const [isLoading, setIsLoading]=useState(false);
   const handleSelectImage=()=>{
 setSelectedImage("")
   }
   const handleSelectVideo=()=>{
 
   }
+
+  const formik = useFormik({
+    initialValues:{
+      caption:"",
+      image:"",
+      video:""
+    },
+    onSubmit:(values)=>{
+      console.log("formik values", values)
+    }
+  });
   return (
     <Modal
       open={open}
@@ -74,8 +86,24 @@ setSelectedImage("")
   </div>
 </div>
 
+{selectedImage &&<div>
+  <img className="h-[10rem]" src="{selectedImage}" alt="" />
+</div>
+}
+
+<div className="flex w-full justify-end">
+  <button variant="contained" type="submit" sx={{borderRadius:"1.5rem"}} >Post</button>
+</div>
+
           </div>
         </form>
+        <Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={isLoading}
+  onClick={handleClose}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>
       </Box>
     </Modal>
   );
