@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Formik, useFormik } from "formik";
 import ImageIcon from '@mui/icons-material/Image';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
+import { uploadToCloudniry } from "../../utils/uploadToCloudniry";
 
 
 
@@ -26,8 +27,15 @@ const CreatePostModal = ({ handleClose, open }) => {
   const [selectedImage, setSelectedImage]=useState();
   const [selectedVideo, setSelectedVideo]=useState();
   const [isLoading, setIsLoading]=useState(false);
-  const handleSelectImage=()=>{
-setSelectedImage("")
+
+
+  const handleSelectImage= async(event)=>{
+    setIsLoading(true)
+const imageUrl = await uploadToCloudniry(event.target.files[0], "image")
+setSelectedImage(imageUrl)
+setIsLoading(false)
+formik.setFieldValue("image", imageUrl)
+
   }
   const handleSelectVideo=()=>{
 

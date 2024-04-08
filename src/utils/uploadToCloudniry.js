@@ -7,7 +7,13 @@ const data = new FormData()
 data.append("file", pics)
 data.append("upload_preset", upload_preset)
 data.append("cloud_name", cloud_name)
-cloud res = await fetch(`POST https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`)
+const res = await fetch(`POST https://api.cloudinary.com/v1_1/${cloud_name}/${fileType}/upload`,
+{method:"post", body:data})
+console.log("res", res)
+const fileData = await res.json();
+
+console.log("res", fileData.url)
+return fileData.url
     }
     else{
         console.log("error........ayo")
