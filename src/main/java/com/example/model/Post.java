@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -36,7 +37,7 @@ public class Post {
     //tara euta post vitra multiple user le like garna milxa
   //one post xa multiple user le like garna milxa
     
-    @OneToMany     
+    @ManyToMany  
     private List<User> liked=new ArrayList<>();
     
     private LocalDateTime createdAt;
