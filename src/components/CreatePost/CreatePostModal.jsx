@@ -74,7 +74,7 @@ formik.setFieldValue("image", imageUrl)
   <div>
     <input type="file" accept="image/*" onChange={handleSelectImage} style={{display:"none"}} id="image-input" />
     <label htmlFor="image-input">
-    <IconButton color="primary">
+    <IconButton color="primary" component="span">
 
 <ImageIcon/>
 </IconButton>
