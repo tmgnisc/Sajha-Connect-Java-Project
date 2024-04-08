@@ -38,14 +38,12 @@ const PostCard = ({item}) => {
       <CardMedia
         component="img"
         height="194"
-        image="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+        image={item.image}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        {item.caption}
         </Typography>
       </CardContent>
 
@@ -69,7 +67,18 @@ const PostCard = ({item}) => {
        
       </div>
       </CardActions>
+<section>
 
+  <div className="flex items-center space-x-5 mx-3 my-5">
+    <Avatar sx={{}} />
+
+<input onKeyPress={(e)=>{
+  if(e.key=="Enter"){
+    console.log("enter pressed--------")
+  }
+}} className="w-full outline-none bg-transparent border border-[#3b4054] rounded-full px-5 py-2" type="text" placeholder="write comment.." />
+  </div>
+</section>
    
     </Card>
   );
