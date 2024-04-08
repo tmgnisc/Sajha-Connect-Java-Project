@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.config.JwtProvider;
+import com.example.exceptions.UserException;
 import com.example.model.User;
 import com.example.repository.UserRepository;
 
@@ -33,7 +34,7 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public User findUserById(int userId) throws Exception {
+	public User findUserById(int userId) throws UserException {
 		Optional<User> user = userRepository.findById(userId);
 
 		if(user.isPresent()) {
@@ -41,7 +42,7 @@ public class UserServiceImplementation implements UserService{
 		}
 				
 			
-				throw new Exception("user not exit with this id"+userId);
+				throw new UserException("user not exit with this id"+userId);
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class UserServiceImplementation implements UserService{
 	}	
 
 	@Override
-	public User followUser(int reqUserId, int userId2) throws Exception{
+	public User followUser(int reqUserId, int userId2) throws UserException{
 		User reqUser = findUserById(reqUserId);   //reqUser vaneko loggedin user
 		User user2= findUserById(userId2);
 		//update hunxa user2 ma ani followers add gardinxa 
@@ -66,11 +67,11 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public User updateUser(User user, int userId) throws Exception {
+	public User updateUser(User user, int userId) throws UserException {
 		//checking user if exist or not
 		Optional<User> user1 = userRepository.findById(userId);
 		if(user1.isEmpty()) {
-			throw new Exception("user not exist with this mentioned id."+userId);
+			throw new UserException("user not exist with this mentioned id."+userId);
 		}
 		User oldUser=user1.get();
 //		User user1 = new User(1,"Nischal","Tamang","nschaltmg2023@gmail.com","12345" );

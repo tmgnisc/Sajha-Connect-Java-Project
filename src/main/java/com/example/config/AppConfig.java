@@ -40,13 +40,13 @@ public class AppConfig {
 			.anyRequest().permitAll())
 .addFilterBefore(new jwtValidator(), BasicAuthenticationFilter.class)    //tyo endpoint ma janu agadi user authenticate ho ki haina check garna banako method
 	.csrf(csrf-> csrf.disable())
-	.cors(cors->cors.configurationSource(CorsConfigurationSource()));
+	.cors(cors->cors.configurationSource(corsConfigurationSource()));
 	
 		
 		return http.build();
 	}
 	
-	private CorsConfigurationSource CorsConfigurationSource() {
+	private CorsConfigurationSource corsConfigurationSource() {
 		//kun kun url lai allow garne jasto 
 		
 		return new CorsConfigurationSource() {
@@ -56,7 +56,8 @@ public class AppConfig {
 			
 				CorsConfiguration cfg = new CorsConfiguration();
 				cfg.setAllowedOrigins(Arrays.asList(
-                        "http://localhost:3000/"));
+                        "http://localhost:3000",
+                        "http://localhost:3001"));
 				cfg.setAllowedMethods(Collections.singletonList("*"));
 				cfg.setAllowCredentials(true);
 				cfg.setAllowedHeaders(Collections.singletonList("*"));

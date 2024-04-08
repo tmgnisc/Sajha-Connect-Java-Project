@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.exceptions.UserException;
 import com.example.model.User;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
@@ -45,7 +46,7 @@ public class UserController {
 	}
 	
 		@GetMapping("/api/users/{userId}")
-		public User getUserById(@PathVariable("userId")int id) throws Exception{
+		public User getUserById(@PathVariable("userId")int id) throws UserException{
 		User user= userService.findUserById(id);
 		return user;
 
@@ -57,7 +58,7 @@ public class UserController {
 		//xu vane ta url bata feri aru ko userid hanera pani ta edit garna sakxan testo garnu ta vayena tesaile /api/users/userid hatako
 		
 		@PutMapping("/api/users")
-		public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws Exception  {
+		public User updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user) throws UserException  {
 			 User reqUser = userService.findUserByJwt(jwt);
 		
 			User updatedUser = userService.updateUser(user, reqUser.getId());    //aba yeta ko userid chai jwt token bata lyauxa
@@ -79,7 +80,7 @@ public class UserController {
 //		}
 		
 		@PutMapping("/api/users/follow/{userId2}")
-		public User followUserHandler(@RequestHeader("Authorization") String jwt, @PathVariable int userId2) throws Exception {
+		public User followUserHandler(@RequestHeader("Authorization") String jwt, @PathVariable int userId2) throws UserException {
 			
 			User reqUser = userService.findUserByJwt(jwt);
 			User user = userService.followUser(reqUser.getId(), userId2);
