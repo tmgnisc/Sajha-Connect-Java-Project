@@ -68,12 +68,14 @@ console.log("is like", isLikedByReqUser(auth.user.id, item))
           item.user.lastName.toLowerCase()
         }
       />
-      <CardMedia
+      {/* <CardMedia
         component="img"
         height="194"
         image={item.image}
         alt="Paella dish"
-      />
+      /> */}
+      <img className="w-full max-h-[30rem] object-cover object-top " src={item.image} alt="" />
+
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {item.caption}
