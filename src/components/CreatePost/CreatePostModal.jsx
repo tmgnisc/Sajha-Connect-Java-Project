@@ -41,8 +41,16 @@ setIsLoading(false)
 formik.setFieldValue("image", imageUrl)
 
   }
-  const handleSelectVideo=()=>{
-
+  const handleSelectVideo= async(event)=>{
+    setIsLoading(true)
+    const videoUrl = await uploadToCloudniry(event.target.files[0], "image")
+  
+    setSelectedVideo(videoUrl)
+    
+    
+    
+    setIsLoading(false)
+    formik.setFieldValue("video", videoUrl)
   }
 
   const formik = useFormik({
