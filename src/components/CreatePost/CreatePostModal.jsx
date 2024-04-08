@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Modal, Avatar, IconButton, Backdrop, CircularProgress} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Formik, useFormik } from "formik";
@@ -32,7 +32,11 @@ const CreatePostModal = ({ handleClose, open }) => {
   const handleSelectImage= async(event)=>{
     setIsLoading(true)
 const imageUrl = await uploadToCloudniry(event.target.files[0], "image")
+console.log("this is image url", imageUrl)
 setSelectedImage(imageUrl)
+
+
+
 setIsLoading(false)
 formik.setFieldValue("image", imageUrl)
 
@@ -94,10 +98,11 @@ formik.setFieldValue("image", imageUrl)
   </div>
 </div>
 
-{selectedImage &&<div>
-  <img className="h-[10rem]" src="{selectedImage}" alt="" />
+{selectedImage &&  (
+<div>
+  <img className="h-[10rem]" src={selectedImage} alt="image ho" />
 </div>
-}
+)}
 
 <div className="flex w-full justify-end">
   <button variant="contained" type="submit" sx={{borderRadius:"1.5rem"}} >Post</button>

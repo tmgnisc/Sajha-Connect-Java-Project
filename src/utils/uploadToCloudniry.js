@@ -1,5 +1,5 @@
 const cloud_name="dmjfctlgr";
-const upload_preset="nhhvi9rk";
+const upload_preset="nischal_java_project"
 export const uploadToCloudniry=async(pics, fileType)=>{
 
     if(pics && fileType){
