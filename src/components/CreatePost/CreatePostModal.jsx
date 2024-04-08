@@ -7,6 +7,7 @@ import VideoCallIcon from '@mui/icons-material/VideoCall';
 import { uploadToCloudniry } from "../../utils/uploadToCloudniry";
 import {useDispatch} from "react-redux"
 import { createPostAction } from "../../Redux/Post/post.action";
+import { createCommentAction } from "../../Redux/Comment/comment.action";
 
 
 
@@ -67,6 +68,9 @@ formik.setFieldValue("image", imageUrl)
       dispatch(createPostAction(values))
     }
   });
+
+
+
   return (
     <Modal
       open={open}
