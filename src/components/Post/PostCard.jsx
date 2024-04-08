@@ -18,7 +18,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-const PostCard = () => {
+const PostCard = ({item}) => {
   return (
     <Card className="">
       <CardHeader
@@ -32,8 +32,8 @@ const PostCard = () => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Nischal"
-        subheader="@nischaltmg"
+        title={item.user.firstName+ " "+ item.user.lastName}
+        subheader={"@"+item.user.firstName.toLowerCase()+ "_"+ item.user.lastName.toLowerCase()}
       />
       <CardMedia
         component="img"
