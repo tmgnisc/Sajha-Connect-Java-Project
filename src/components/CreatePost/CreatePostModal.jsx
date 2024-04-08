@@ -60,7 +60,7 @@ setSelectedImage("")
                 <p className="text-sm">@nischal</p>
               </div>
             </div>
-            <textarea placeholder="what's on your mind?" onChange={formik.handleChange} value={formik.values.caption} name="caption" id="" rows="4"></textarea>
+            <textarea className="outline-none w-full mt-5 p-2 bg-transparent border border-[#3b4054] rounded-sm" placeholder="what's on your mind?" onChange={formik.handleChange} value={formik.values.caption} name="caption" id="" rows="4"></textarea>
 <div className="flex space-x-5 items-center mt-5">
 
   <div>
