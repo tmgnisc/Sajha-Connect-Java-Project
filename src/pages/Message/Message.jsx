@@ -40,7 +40,7 @@ const handleSelectImage=()=>{
                 <div className="h-full space-y-4 mt-5 overflow-y-scoll hideScrollbar">
 
                   {
-                    message.chats.map((item)=> <UserChatCard/>)
+                    message.chats.map((item)=> <UserChatCard chat={item} />)
                   }
                  
                 </div>
