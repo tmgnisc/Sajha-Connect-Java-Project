@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { searchUser } from "../../Redux/Auth/auth.action";
+import { createChat } from "../../Redux/Message/message.action";
 
 const SearchUser = () => {
   const [userName, setUserName] = useState("");
@@ -15,7 +16,7 @@ const SearchUser = () => {
   };
 
   const handleClick = (id) => {
-    console.log(id);
+    dispatch(createChat({userId:id}))
   };
 
   return (
@@ -32,7 +33,7 @@ const SearchUser = () => {
   auth.searchUser.map((item)=><Card key={item.id} className="absoulute w-full z-10 top-[4.5rem] cursor-pointer">
   <CardHeader
     onClick={() => {
-      handleClick();
+      handleClick(item.id);
       setUserName("");
     }}
     avatar={
