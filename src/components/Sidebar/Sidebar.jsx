@@ -24,6 +24,8 @@ const Sidebar = () => {
     navigate(`/profile/${auth.user?.id}`)
   } else if(item.title=="Message"){
  navigate(`/message`)
+  } else if(item.title=="Home"){
+    navigate('/')
   }
   }
   return (

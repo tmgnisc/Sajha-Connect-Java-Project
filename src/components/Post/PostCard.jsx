@@ -52,7 +52,7 @@ console.log("is like", isLikedByReqUser(auth.user.id, item))
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {item.user.firstName[0]}
           </Avatar>
         }
         action={
