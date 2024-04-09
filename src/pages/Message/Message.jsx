@@ -4,6 +4,7 @@ import WestIcon from "@mui/icons-material/West";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import SearchUser from "../../components/SearchUser/SearchUser";
 
 
 
@@ -26,7 +27,7 @@ const handleSelectImage=()=>{
               <div className="h-[83vh]">
                 <div className="">searchUser</div>
                 <div className="h-full space-y-4 mt-5 overflow-y-scoll hideScrollbar">
-                  UserChatCard
+                  <SearchUser/>
                 </div>
               </div>
             </div>
