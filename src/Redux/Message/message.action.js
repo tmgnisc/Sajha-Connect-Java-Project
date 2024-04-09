@@ -32,7 +32,7 @@ dispatch({
 export const getAllChats=(message)=>async(dispatch)=>{
     dispatch({type:actionType.GET_ALL_CHATS_REQUEST})
     try{
-const{data}=await api.post(`/api/chats/user`,message)
+const{data}=await api.get(`/api/chats/user`,message)
 console.log("get all chats", data)
 dispatch({type:actionType.GET_ALL_CHATS_SUCCESS, payload:data})
     } catch(error){
