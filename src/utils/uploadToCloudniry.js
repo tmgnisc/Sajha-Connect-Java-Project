@@ -20,3 +20,4 @@ return fileData.url
     }
 
 }
+export default uploadToCloudniry
