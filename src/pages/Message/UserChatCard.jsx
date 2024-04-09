@@ -1,14 +1,23 @@
 import React from 'react'
-import {CardHeader, Avatar} from '@mui/material'
+import {CardHeader, Avatar, IconButton, Card} from '@mui/material'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
  const UserChatCard = () => {
   return (
-  <CardHeader>
-avatar={
-    <Avatar src='https://cdn.pixabay.com/photo/2016/06/15/16/16/man-1459246_960_720.png'/>
-}
+    <Card>
+  <CardHeader avatar={
+    <Avatar sx={{width:"3.5rem", height:"3.5rem", fontSize:"1.5rem", bgcolor:"#191c29", color:"rgb(88,199,250)"}} src='https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'/>
+} action={<IconButton>
+    <MoreHorizIcon/>
+    </IconButton>}
+    title="nischal"
+    subheader={"new message"}
+>
+
 
   </CardHeader>
+    </Card>
+
   )
 }
 
