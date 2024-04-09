@@ -5,6 +5,7 @@ import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import SearchUser from "../../components/SearchUser/SearchUser";
+import UserChatCard from "./UserChatCard";
 
 
 
@@ -25,12 +26,12 @@ const handleSelectImage=()=>{
                 <h1 className="text-xl font-bold">Home</h1>
               </div>
               <div className="h-[83vh]">
-                <div className="">searchUser</div>
+                <div className=""><SearchUser/></div>
                 <div className="h-full space-y-4 mt-5 overflow-y-scoll hideScrollbar">
-                  <SearchUser/>
+                  <UserChatCard/>
                 </div>
               </div>
-            </div>
+            </div>  
           </div>
         </Grid>
         <Grid className="h-full" item xs={9}>
