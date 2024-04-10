@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Avatar, IconButton } from "@mui/material";
+import { Grid, Avatar, IconButton, Backdrop, CircularProgress } from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
@@ -30,13 +30,13 @@ const Message = () => {
     setLoading(true);
     console.log("handle select image");
     const imgUrl = await uploadToCloudniry(e.target.files[0], "image");
-    selectedImage(imgUrl);
+    setSelectedImage(imgUrl);
     setLoading(false);
   };
 
   const handleCreateMessage = (value) => {
     const message = {
-      chatId: currentChat.id,
+      chatId: currentChat?.id,
       content: value,
       image: selectedImage,
     };
@@ -84,7 +84,7 @@ setMessages([...messages,message.message])
                 <div className="flex items-center space-x-3">
                   <Avatar src="https://cdn.pixabay.com/photo/2014/04/03/11/56/avatar-312603_960_720.png" />
                   <p>
-                    {auth.user.id === currentChat.users[0].id
+                    {auth.user?.id === currentChat.users[0]?.id
                       ? currentChat.users[1].firstName +
                         " " +
                         currentChat.users[1].lastName
@@ -109,11 +109,14 @@ setMessages([...messages,message.message])
                 )}
               </div>
               <div className="sticky bottom-0 border-l">
+                {selectedImage && <img className="w-[5rem] h-[5rem] object-cover px-2" src={selectedImage} alt="" />}
                 <div className="py-5 flex items-center justify-center space-x-5">
+             
                   <input
                     onKeyPress={(e) => {
                       if (e.key === "Enter" && e.target.value) {
                         handleCreateMessage(e.target.value);
+                        setSelectedImage("")
                       }
                     }}
                     className="bg-transparent border border-[#3b4054] rounded-full w-[90%] py-3 px-5 "
@@ -143,6 +146,14 @@ setMessages([...messages,message.message])
           }
         </Grid>
       </Grid>
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
