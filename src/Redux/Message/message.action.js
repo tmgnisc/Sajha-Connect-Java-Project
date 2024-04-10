@@ -1,7 +1,7 @@
 import * as actionType from "./message.actionType"
 import {api} from "../../config/api"
 
-export const createMessage=(message)=>async(dispatch)=>{
+export const createMessage=(message)=> async(dispatch)=>{
     dispatch({type:actionType.CREATE_MESSAGE_REQUEST})
     try{
 const{data}=await api.post(`/api/messages/chat/${message.chatId}`,message)

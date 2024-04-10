@@ -17,8 +17,7 @@ export const messageReducer=(state=initialState, action)=>{
                 return{...state, chats:[action.payload, ...state.chats]}
             case actionType.GET_ALL_CHATS_SUCCESS:
                 return{...state, chats:action.payload}
-            break;
-    
+     
         default:
             return state;
     }
