@@ -28,7 +28,7 @@ public class MessageServiceImplementation implements MessageService {
 	public Message createMessage(User user, int chatId, Message req) throws Exception {
 		Chat chat = chatService.findChatById(chatId);
 			Message message = new Message();
-			message.setChat(chat);
+		message.setChat(chat);
 			message.setContent(req.getContent());
 			message.setImage(req.getImage());
 			message.setUser(user);
