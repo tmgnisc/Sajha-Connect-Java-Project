@@ -12,7 +12,8 @@ import { createMessage, getAllChats } from "../../Redux/Message/message.action";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import uploadToCloudniry from "../../utils/uploadToCloudniry";
 import SockJs from "sockjs-client"
-import Stom from "stompjs"
+import Stomp from "stompjs"
+
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Message = () => {
 
   useEffect(() => {
     dispatch(getAllChats());
-  }, []);
+  },[]);
 
   console.log("chats----", message.chats);
 
@@ -43,7 +44,7 @@ const Message = () => {
       image: selectedImage,
     };
     dispatch(createMessage({message, sendMessageToServer}));
-    console.log("Message created:", message); // Add this line to log the created message
+    // console.log("Message created:", message); // Add this line to log the created message
   };
 
   useEffect(()=>{
@@ -51,15 +52,14 @@ setMessages([...messages,message.message])
   },[message.message])
 
 
-  const [stomClient, setStomClient]=useState(null)
+  const [stompClient, setStompClient]=useState(null)
   useEffect(()=>{
   const sock=new SockJs("http://localhost:5454/ws")
-const stomp= Stom.over(sock)
-setStomClient(stomp)
+const stomp= Stomp.over(sock)
+setStompClient(stomp)
 stomp.connect({}, onConnect, onErr)
 
-  },[]
-)
+  },[])
 
 const onConnect=()=>{
   console.log("websocket connected....")
@@ -73,14 +73,17 @@ const onErr=(error)=>{
 
 useEffect(()=>{
 
-  if(stomClient && auth.user && currentChat){
-    const subscription = stomClient.subscribe(`/user/${currentChat.id}/private`,  onMessageReceive)
+  if(stompClient && auth.user && currentChat){
+    console.log("mula ko sag kina chaldaina yo")
+    const subscription = stompClient.subscribe(`/user/${currentChat.id}/private`,  onMessageReceive)
+    console.log("subscription", subscription)
+    
   }
-}
-)
+})
+
 const sendMessageToServer=(newMessage)=>{
-   if(stomClient && newMessage){
-    stomClient.send(`/app/chat/${currentChat?.id.toString()}`, {}, JSON.stringify(message))
+   if(stompClient && newMessage){
+    stompClient.send(`/app/chat/${currentChat?.id.toString()}`,{}, JSON.stringify(newMessage))
 
    }
 }
