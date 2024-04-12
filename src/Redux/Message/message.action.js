@@ -6,9 +6,8 @@ export const createMessage = (reqData) => async (dispatch) => {
   try {
     const { data } = await api.post(
       `/api/messages/chat/${reqData.message.chatId}`,
-      reqData.message
-    );
-    reqData.sendMessageToServer(data);
+      reqData.message);
+    reqData.sendMessageToServer(data)
     console.log("created message", data);
     dispatch({ type: actionType.CREATE_MESSAGE_SUCCESS, payload: data });
   } catch (error) {

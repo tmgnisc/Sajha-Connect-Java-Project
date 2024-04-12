@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Avatar, IconButton, Backdrop, CircularProgress } from "@mui/material";
+import {
+  Grid,
+  Avatar,
+  IconButton,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
@@ -11,9 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createMessage, getAllChats } from "../../Redux/Message/message.action";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import uploadToCloudniry from "../../utils/uploadToCloudniry";
-import SockJs from "sockjs-client"
-import Stomp from "stompjs"
-
+import SockJs from "sockjs-client";
+import Stom from 'stompjs'
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -25,7 +30,7 @@ const Message = () => {
 
   useEffect(() => {
     dispatch(getAllChats());
-  },[]);
+  }, []);
 
   console.log("chats----", message.chats);
 
@@ -43,53 +48,51 @@ const Message = () => {
       content: value,
       image: selectedImage,
     };
-    dispatch(createMessage({message, sendMessageToServer}));
+    dispatch(createMessage({message, sendMessageToServer } ));
     // console.log("Message created:", message); // Add this line to log the created message
   };
 
-  useEffect(()=>{
-setMessages([...messages,message.message])
-  },[message.message])
+  useEffect(() => {
+    setMessages([...messages, message.message]);
+  }, [message.message]);
 
+  const [stompClient, setStomClient] = useState(null);
+  useEffect(() => {
+    const sock = new SockJs("http://localhost:5454/ws");
+    const stomp = Stom.over(sock);
+    setStomClient(stomp);
+    stomp.connect({}, onConnect, onErr);
+  }, []);
 
-  const [stompClient, setStompClient]=useState(null)
-  useEffect(()=>{
-  const sock=new SockJs("http://localhost:5454/ws")
-const stomp= Stomp.over(sock)
-setStompClient(stomp)
-stomp.connect({}, onConnect, onErr)
+  const onConnect = () => {
+    console.log("websocket connected....");
+  };
 
-  },[])
+  const onErr = (error) => {
+    console.log("errr....", error);
+  };
 
-const onConnect=()=>{
-  console.log("websocket connected....")
-}
-
-
-const onErr=(error)=>{
-  console.log("errr....", error)
-}
-
-
-useEffect(()=>{
-
-  if(stompClient && auth.user && currentChat){
-    console.log("mula ko sag kina chaldaina yo")
-    const subscription = stompClient.subscribe(`/user/${currentChat.id}/private`,  onMessageReceive)
-    console.log("subscription", subscription)
+  useEffect(() => {
+    console.log("useEffect hook is executing");
     
-  }
-})
-
+    if (stompClient && auth.user && currentChat) {
+      console.log("Subscription setup:", `/user/${currentChat.id}/private`);
+      const subscription = stompClient.subscribe(`/user/${currentChat.id}/private`, onMessageReice);
+      console.log("Subscription:", subscription);
+    } else {
+      console.log("Subscription not set up. Missing stompClient, auth.user, or currentChat.");
+    }
+  }, [stompClient, auth.user, currentChat]);
+  
 const sendMessageToServer=(newMessage)=>{
-   if(stompClient && newMessage){
-    stompClient.send(`/app/chat/${currentChat?.id.toString()}`,{}, JSON.stringify(newMessage))
-
-   }
+  if(stompClient && newMessage){
+    stompClient.send(`/app/chat/${currentChat?.id.toString()}`,{},JSON.stringify(message))
+  }
 }
-const onMessageReceive=(newMessage)=>{
-  console.log("message receive from web socket", newMessage)
-}
+  const onMessageReice=(newMessage)=>{
+    console.log("message receive from websocket", newMessage)
+  }
+  
   return (
     <div>
       <Grid container className="h-screen overflow-y-hidden">
@@ -106,14 +109,16 @@ const onMessageReceive=(newMessage)=>{
                 </div>
                 <div className="h-full space-y-4 mt-5 overflow-y-scoll hideScrollbar">
                   {message.chats.map((item) => {
-                  return <div
-                      onClick={() => {
-                        setCurrentChat(item);
-                        setMessages(item.messages || []); // Provide an empty array if messages are null or undefined
-                      }}
-                    >
-                      <UserChatCard chat={item} />
-                    </div>
+                    return (
+                      <div
+                        onClick={() => {
+                          setCurrentChat(item);
+                          setMessages(item.messages || []); // Provide an empty array if messages are null or undefined
+                        }}
+                      >
+                        <UserChatCard chat={item} />
+                      </div>
+                    );
                   })}
                 </div>
               </div>
@@ -121,7 +126,7 @@ const onMessageReceive=(newMessage)=>{
           </div>
         </Grid>
         <Grid className="h-full" item xs={9}>
-          {currentChat ? 
+          {currentChat ? (
             <div>
               <div className="flex justify-between items-center border-l p-5">
                 <div className="flex items-center space-x-3">
@@ -147,19 +152,24 @@ const onMessageReceive=(newMessage)=>{
                 </div>
               </div>
               <div className="hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5">
-                {messages.map((item) => 
+                {messages.map((item) => (
                   <ChatMessage item={item} />
-                )}
+                ))}
               </div>
               <div className="sticky bottom-0 border-l">
-                {selectedImage && <img className="w-[5rem] h-[5rem] object-cover px-2" src={selectedImage} alt="" />}
+                {selectedImage && (
+                  <img
+                    className="w-[5rem] h-[5rem] object-cover px-2"
+                    src={selectedImage}
+                    alt=""
+                  />
+                )}
                 <div className="py-5 flex items-center justify-center space-x-5">
-             
                   <input
                     onKeyPress={(e) => {
                       if (e.key === "Enter" && e.target.value) {
                         handleCreateMessage(e.target.value);
-                        setSelectedImage("")
+                        setSelectedImage("");
                       }
                     }}
                     className="bg-transparent border border-[#3b4054] rounded-full w-[90%] py-3 px-5 "
@@ -181,19 +191,18 @@ const onMessageReceive=(newMessage)=>{
                 </div>
               </div>
             </div>
-           : 
+          ) : (
             <div className="h-full space-y-5 flex flex-col justify-center items-center">
               <ChatBubbleIcon sx={{ fontSize: "15rem" }} />
               <p className="text-xl font-semibold">No chat Selected</p>
             </div>
-          }
+          )}
         </Grid>
       </Grid>
 
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
-
       >
         <CircularProgress color="inherit" />
       </Backdrop>
