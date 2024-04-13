@@ -91,6 +91,7 @@ const sendMessageToServer=(newMessage)=>{
 }
   const onMessageReice=(newMessage)=>{
     console.log("message receive from websocket", newMessage)
+    console.log("test")
   }
   
   return (
