@@ -90,8 +90,8 @@ const sendMessageToServer=(newMessage)=>{
   }
 }
   const onMessageReice=(newMessage)=>{
-    console.log("message receive from websocket", newMessage)
-    console.log("test")
+ 
+    console.log("nothing hahahahha ma pagal vaye ", newMessage)
   }
   
   return (
