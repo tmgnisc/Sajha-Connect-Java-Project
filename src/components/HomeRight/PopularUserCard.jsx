@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Avatar, Button, CardHeader } from '@mui/material';
 import axios from 'axios';
 import { red } from '@mui/material/colors';
+import { api } from "../../config/api";
 
 const PopularUserCard = () => {
   const [popularUsers, setPopularUsers] = useState([]);
@@ -13,11 +14,53 @@ const PopularUserCard = () => {
         setPopularUsers(response.data);
       } catch (error) {
         console.error('Error fetching popular users:', error);
-      }
+      } 
     };
 
     fetchPopularUsers();
   }, []);
+
+  const handleFollow = async (userId) => {
+    try {
+      const jwt = localStorage.getItem('jwt');
+      // Make the request to follow the user without including the current user's ID
+      await api.put(`/api/users/follow/${userId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+  
+      // Update the UI to reflect the user has been followed
+      setPopularUsers(prevUsers =>
+        prevUsers.map(user =>
+          user.id === userId ? { ...user, followed: true } : user
+        )
+      );
+    } catch (error) {
+      console.error('Error following user:', error);
+    }
+  };
+
+  const handleUnfollow = async (userId) => {
+    try {
+      const jwt = localStorage.getItem('jwt');
+      // Make the request to unfollow the user without including the current user's ID
+      await api.put(`/api/users/unfollow/${userId}`, {}, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      // Update the UI to reflect the user has been unfollowed
+      setPopularUsers(prevUsers =>
+        prevUsers.map(user =>
+          user.id === userId ? { ...user, followed: false } : user
+        )
+      );
+    } catch (error) {
+      console.error('Error unfollowing user:', error);
+    }
+  };
 
   return (
     <div>
@@ -25,7 +68,13 @@ const PopularUserCard = () => {
         <CardHeader
           key={user.id}
           avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" />}
-          action={<Button size="small">Follow</Button>}
+          action={
+            user.followed ? ( // If user is followed, show "Unfollow" button
+              <Button size="small" onClick={() => handleUnfollow(user.id)}>Unfollow</Button>
+            ) : ( // Otherwise, show "Follow" button
+              <Button size="small" onClick={() => handleFollow(user.id)}>Follow</Button>
+            )
+          }
           title={`${user.firstName} ${user.lastName}`}
           subheader={`@${user.firstName.toLowerCase()}_${user.lastName.toLowerCase()}`}
         />

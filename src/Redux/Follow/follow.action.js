@@ -1,5 +1,4 @@
-import axios from "axios";
-import { API_BASE_URL } from "../../config/api";
+import { api } from "../../config/api";
 import {
   FOLLOW_USER_FAILURE,
   FOLLOW_USER_REQUEST,
@@ -12,16 +11,7 @@ import {
 export const followUser = (userId) => async (dispatch) => {
   dispatch({ type: FOLLOW_USER_REQUEST });
   try {
-    const jwt = localStorage.getItem("jwt");
-    const { data } = await axios.put(
-      `${API_BASE_URL}/api/users/follow/${userId}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
+    const { data } = await api.put(`/api/users/follow/${userId}`);
     dispatch({ type: FOLLOW_USER_SUCCESS, payload: data });
   } catch (error) {
     console.log("Error following user:", error);
@@ -32,16 +22,7 @@ export const followUser = (userId) => async (dispatch) => {
 export const unfollowUser = (userId) => async (dispatch) => {
   dispatch({ type: UNFOLLOW_USER_REQUEST });
   try {
-    const jwt = localStorage.getItem("jwt");
-    const { data } = await axios.put(
-      `${API_BASE_URL}/api/users/unfollow/${userId}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
+    const { data } = await api.put(`/api/users/unfollow/${userId}`);
     dispatch({ type: UNFOLLOW_USER_SUCCESS, payload: data });
   } catch (error) {
     console.log("Error unfollowing user:", error);
