@@ -22,3 +22,4 @@ export const SEARCH_USER_SUCCESS="SEARCH_USER_SUCCESS"
 export const SEARCH_USER_FAILURE="SEARCH_USER_FAILURE"
 
 
+export const LOGOUT = "LOGOUT"; // New action type for logout

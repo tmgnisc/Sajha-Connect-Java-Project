@@ -28,6 +28,7 @@ const Sidebar = () => {
     navigate('/')
   }
   }
+  
   return (
     <Card className="card h-screen flex flex-col justify-between py-5">
       <div className="space-y-8 pl-5">
