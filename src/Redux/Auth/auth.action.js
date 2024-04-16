@@ -1,7 +1,7 @@
 // auth.actions.js
 
 import axios from "axios";
-import { API_BASE_URL } from "../../config/api";
+import { API_BASE_URL, api } from "../../config/api";
 import {
   GET_PROFILE_FAILURE,
   GET_PROFILE_REQUEST,
@@ -93,7 +93,7 @@ export const updateProfileAction = (reqData) => async (dispatch) => {
 export const searchUser = (query) => async (dispatch) => {
   dispatch({ type: SEARCH_USER_REQUEST });
   try {
-    const { data } = await axios.get(`/api/users/search?query=${query}`);
+    const { data } = await api.get(`/api/users/search?query=${query}`)
 
     console.log("search user--- ", data);
     dispatch({ type: SEARCH_USER_SUCCESS, payload: data });

@@ -6,6 +6,7 @@ import { api } from "../../config/api";
 
 const PopularUserCard = () => {
   const [popularUsers, setPopularUsers] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
 
   useEffect(() => {
     const fetchPopularUsers = async () => {
@@ -18,6 +19,12 @@ const PopularUserCard = () => {
     };
 
     fetchPopularUsers();
+  }, []);
+
+  useEffect(() => {
+    // Fetch the logged-in user's ID from localStorage or your authentication state
+    const loggedInUserId = localStorage.getItem('userId');
+    setLoggedInUserId(loggedInUserId);
   }, []);
 
   const handleFollow = async (userId) => {
@@ -62,9 +69,13 @@ const PopularUserCard = () => {
     }
   };
 
+  // Filter out the logged-in user from the list of popular users
+  const filteredUsers = popularUsers.filter(user => user.id !== loggedInUserId);
+  console.log("this is filetered user", filteredUsers)
+
   return (
     <div>
-      {popularUsers.map((user) => (
+      {filteredUsers.map((user) => (
         <CardHeader
           key={user.id}
           avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" />}
