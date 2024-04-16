@@ -20,11 +20,14 @@ const Login = () => {
 
   const handleSubmit=(values)=>{
     console.log("yo chai handle submit", values);
-    if (values.password === "1234567890") {
+    if (values.email === "abcd@gmail.com") {
+      setErrorMessage("User does not exist");
+      setFormValue({ ...values, email: "", password: "" }); 
+    } else if (values.password === "1234567890") {
       setErrorMessage("Password is incorrect");
-      setFormValue({ ...values, password: "" }); // Clear the password field
+      setFormValue({ ...values, password: "" }); 
     } else {
-      setErrorMessage(""); // Clear the error message
+      setErrorMessage("");
       dispatch(LoginUserAction({data:values}));
     }
   };
