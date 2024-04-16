@@ -1,9 +1,12 @@
+// auth.reducer.js
+
 import {
   GET_PROFILE_REQUEST,
   GET_PROFILE_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -16,8 +19,9 @@ const initialState = {
   error: null,
   loading: false,
   user: null,
-  searchUser:[]
+  searchUser: [],
 };
+
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -26,18 +30,23 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, loading: true, error: null };
 
     case GET_PROFILE_SUCCESS:
-      case UPDATE_PROFILE_SUCCESS:
+    case UPDATE_PROFILE_SUCCESS:
       return { ...state, user: action.payload, error: null, loading: false };
 
-      case SEARCH_USER_SUCCESS:
-        return{...state, searchUser:action.payload, loading:false, error:null}
+    case SEARCH_USER_SUCCESS:
+      return { ...state, searchUser: action.payload, loading: false, error: null };
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return { ...state, jwt: action.payload, loading: false, error: null };
+
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
       return { ...state, loading: false, error: action.payload };
+
+    case LOGOUT:
+      return { ...state, jwt: null, user: null, error: null }; // Reset authentication state on logout
+
     default:
       return state;
   }
