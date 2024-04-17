@@ -44,6 +44,8 @@ const CreatePostModal = ({ handleClose, open }) => {
     formik.setFieldValue("video", videoUrl);
   };
 
+  // just a commment
+
   const formik = useFormik({
     initialValues: {
       caption: "",
@@ -82,8 +84,8 @@ const CreatePostModal = ({ handleClose, open }) => {
               value={formik.values.caption}
               name="caption"
               id=""
-              rows="4"
-            ></textarea>
+              rows="4"  
+            ></textarea>    
             <div className="flex space-x-5 items-center mt-5">
               <div>
                 <input type="file" accept="image/*" onChange={handleSelectImage} style={{ display: "none" }} id="image-input" />
@@ -94,6 +96,7 @@ const CreatePostModal = ({ handleClose, open }) => {
                 </label>
                 <span>Image</span>
               </div>
+         
               <div>
                 <input type="file" accept="video/*" onChange={handleSelectVideo} style={{ display: "none" }} id="video-input" />
                 <label htmlFor="video-input">
