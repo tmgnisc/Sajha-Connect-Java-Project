@@ -32,6 +32,7 @@ const Profile = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error, e.g., set an error state or display a message to the user
+        //test
       }
     };
 
